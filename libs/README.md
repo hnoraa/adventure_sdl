@@ -1,10 +1,20 @@
-# Visual Studio Setup
-## Initial
+# Installation
+(tips & tricks)
+
+## SDL links
+SDL - https://www.libsdl.org
+SDL Image - https://www.libsdl.org/projects/SDL_image/
+
+## SDL Source
+For Windows, download the ```*-VC.zip``` archives
+
+## Visual Studio Setup
+### Initial
 1. Create an empty C++ project.
 2. Create a new empty c++ file called main.cpp
 3. Make sure the Debug/Release Configurations are set to x64 if using SDL x64
 
-## Properties
+### Properties
 Ref: https://www.youtube.com/watch?v=QQzAHcojEKg&list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx
 
 From the project properties (right-click, select Properties).
