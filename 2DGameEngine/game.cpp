@@ -1,6 +1,5 @@
 #include "game.h"
 
-
 Game::Game()
 {
 	_running = false;
