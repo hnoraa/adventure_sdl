@@ -1,4 +1,8 @@
 #include "game.h"
+#include "textureManager.h"
+
+SDL_Texture* playerTexture;
+SDL_Rect srcRect, destRect;
 
 Game::Game()
 {
@@ -46,6 +50,8 @@ int Game::init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 	std::cout << "Renderer Created..." << std::endl;
 
+	playerTexture = TextureManager::loadTexture("res/imgs/tester.png", _renderer);
+
 	_running = true;
 }
 
@@ -66,7 +72,15 @@ void Game::handleEvents()
 void Game::handleUpdates()
 {
 	_counter++;
+
+	// scale for player texture
+	destRect.h = 32;
+	destRect.w = 32;
+	destRect.x = _counter;
+
 	std::cout << _counter << std::endl;
+
+	if (_counter >= 578) _counter = 32;
 }
 
 void Game::handleRenders()
@@ -75,6 +89,7 @@ void Game::handleRenders()
 	SDL_RenderClear(_renderer);
 
 	// add rendering items here
+	SDL_RenderCopy(_renderer, playerTexture, NULL, &destRect);
 
 	// present renderer
 	SDL_RenderPresent(_renderer);
@@ -82,6 +97,8 @@ void Game::handleRenders()
 
 void Game::clean()
 {
+	SDL_DestroyTexture(playerTexture);
+
 	SDL_DestroyWindow(_window);
 	SDL_DestroyRenderer(_renderer);
 	SDL_Quit();

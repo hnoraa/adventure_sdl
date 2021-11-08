@@ -3,20 +3,34 @@
 Game* game = nullptr;
 
 int main(int argc, char* argv[]) {
+	const int FPS = 60;
+	const int frameDelay = 1000 / FPS;
+
+	Uint32 frameStart;
+	int frameTime;
+
 	game = new Game();
 
-	if (game->init("Adventure", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 600, true) == -1) {
+	if (game->init("Adventure", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 600, false) == -1) {
 		return -1;
 	}
 
 	while (game->running()) {
+		// get running time start for this frame
+		frameStart = SDL_GetTicks();
+
 		game->handleEvents();
 
 		game->handleUpdates();
 
 		game->handleRenders();
 
-		// clock tick
+		// clock tick (frame time) - time in ms
+		frameTime = SDL_GetTicks() - frameStart;
+
+		if (frameDelay > frameTime) {
+			SDL_Delay(frameDelay - frameTime);
+		}
 	}
 
 	game->clean();

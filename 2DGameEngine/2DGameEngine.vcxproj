@@ -145,9 +145,15 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="textureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
+    <ClInclude Include="textureManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\imgs\tester.bmp" />
+    <Image Include="res\imgs\tester.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
