@@ -45,3 +45,6 @@ From the project properties (right-click, select Properties).
 	4. Select Linker>Input
 		1. In Additional Dependencies add SDL2_image.lib
 	5. Click Apply and OK
+
+## Linux Setup
+To install SDL run: ```sudo apt-get install libsdl2-dev libsdl2-image-dev``` (add any additional libraries, need the -dev installs)
