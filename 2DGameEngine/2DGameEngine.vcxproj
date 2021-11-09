@@ -152,6 +152,7 @@
     <ClInclude Include="defines.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameObject.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>
   <ItemGroup>

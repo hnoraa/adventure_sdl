@@ -1,9 +1,12 @@
 #include "gameObject.h"
 
-GameObject::GameObject(const char* textureSheet, SDL_Renderer* renderer)
+GameObject::GameObject(const char* textureSheet, SDL_Renderer* renderer, int x, int y)
 {
 	_renderer = renderer;
-	_texture = TextureManager::loadTexture(textureSheet, renderer);
+	_texture = TextureManager::loadTexture(textureSheet, _renderer);
+
+	_x = x;
+	_y = y;
 }
 
 GameObject::~GameObject()
@@ -12,11 +15,12 @@ GameObject::~GameObject()
 
 void GameObject::handleUpdates()
 {
-	_x = 10;
-	_y = 10;
+	
+	_x++;
+	_y++;
 
-	_srcRect.h = 32;
-	_srcRect.w = 32;
+	_srcRect.h = SPRITE_H;
+	_srcRect.w = SPRITE_W;
 	_srcRect.x = 0;
 	_srcRect.y = 0;
 

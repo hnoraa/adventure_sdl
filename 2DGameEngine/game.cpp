@@ -54,7 +54,7 @@ int Game::init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 	_running = true;
 
-	player = new GameObject("/res/imgs/tester.png", _renderer);
+	player = new GameObject(SPRITE_TEXTURE, _renderer, 100, 100);
 }
 
 void Game::handleEvents()
