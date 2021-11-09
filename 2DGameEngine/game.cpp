@@ -24,7 +24,8 @@ int Game::init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 	if (fullScreen) flags = SDL_WINDOW_FULLSCREEN;
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) 
+	{
 		std::cout << "ERROR: Can't initialize subsystems..." << std::endl;
 		return -1;
 	}
@@ -33,7 +34,8 @@ int Game::init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 	_window = SDL_CreateWindow(title, x, y, w, h, flags);
 
-	if (!_window) {
+	if (!_window) 
+	{
 		std::cout << "ERROR: Can't create window..." << std::endl;
 		return -1;
 	}
@@ -41,7 +43,8 @@ int Game::init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 	_renderer = SDL_CreateRenderer(_window, -1, 0);
 
-	if (!_renderer) {
+	if (!_renderer) 
+	{
 		std::cout << "ERROR: Can't create renderer..." << std::endl;
 		return -1;
 	}
