@@ -15,7 +15,6 @@ GameObject::~GameObject()
 
 void GameObject::handleUpdates()
 {
-	
 	_x++;
 	_y++;
 
