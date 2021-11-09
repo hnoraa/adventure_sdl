@@ -4,6 +4,7 @@
 #define GAME_H
 
 #include "defines.h"
+#include <iostream>
 
 class Game
 {
@@ -32,8 +33,6 @@ private:
 
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;
-
-	int _counter;
 };
 #endif // !GAME_H
 

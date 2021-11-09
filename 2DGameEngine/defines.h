@@ -9,6 +9,4 @@
 #include "SDL/SDL_image.h"
 #endif
 
-#include <iostream>
-
 #endif // !DEFINES_H

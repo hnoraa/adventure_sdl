@@ -4,6 +4,7 @@
 #define GAME_OBJECT_H
 
 #include "defines.h"
+#include "textureManager.h"
 
 class GameObject
 {
