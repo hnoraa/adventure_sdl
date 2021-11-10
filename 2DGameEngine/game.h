@@ -4,7 +4,8 @@
 #define GAME_H
 
 #include "defines.h"
-#include <iostream>
+#include "gameObject.h"
+#include "tileMap.h"
 
 class Game
 {
@@ -13,26 +14,26 @@ public:
 	~Game();
 
 	// init SDL window
-	int init(const char* title, int x, int y, int w, int h, bool fullScreen);
+	int Init(const char* title, int x, int y, int w, int h, bool fullScreen);
 
 	// game loop components
-	void handleEvents();
-	void handleUpdates();
-	void handleRenders();
+	void HandleEvents();
+	void HandleUpdates();
+	void HandleRenders();
 
 	// GC
-	void clean();
+	void Clean();
 
-	bool running() 
+	bool Running() 
 	{
 		return _running;
 	}
 
+	static SDL_Renderer* renderer;
 private:
 	bool _running;
 
 	SDL_Window* _window;
-	SDL_Renderer* _renderer;
 };
 #endif // !GAME_H
 

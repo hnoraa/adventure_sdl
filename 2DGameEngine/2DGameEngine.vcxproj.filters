@@ -27,6 +27,9 @@
     <ClCompile Include="gameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tileMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -44,13 +47,8 @@
     <ClInclude Include="globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\imgs\tester.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\imgs\tester.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClInclude Include="tileMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

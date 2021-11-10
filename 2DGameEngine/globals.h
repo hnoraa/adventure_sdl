@@ -3,11 +3,17 @@
 #define GLOBALS_H
 
 #define TITLE "2D Engine"
-#define SCREEN_W 640
-#define SCREEN_H 480
+#define SCREEN_W 800
+#define SCREEN_H 640
+#define FULLSCREEN false
+#define FPS 60
 
-#define SPRITE_W 32
-#define SPRITE_H 32
-#define SPRITE_TEXTURE "res/imgs/tester.png"
+#define SPRITE_DIM 32
+#define SPRITE_TEXTURE "res/imgs/player.png"
+
+#define TILE_DIM 32
+#define T_ABYSS "res/imgs/t_abyss.png"
+#define T_DIRT "res/imgs/t_dirt.png"
+#define T_STONE "res/imgs/t_stone.png"
 
 #endif

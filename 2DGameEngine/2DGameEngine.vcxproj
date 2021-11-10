@@ -147,6 +147,7 @@
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="textureManager.cpp" />
+    <ClCompile Include="tileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="defines.h" />
@@ -154,10 +155,7 @@
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="textureManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\imgs\tester.bmp" />
-    <Image Include="res\imgs\tester.png" />
+    <ClInclude Include="tileMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

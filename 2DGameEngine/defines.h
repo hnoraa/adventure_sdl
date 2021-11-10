@@ -9,6 +9,8 @@
 #include <SDL2/SDL_image.h>
 #endif
 
+#include <iostream>
+
 #include "globals.h"
 
 #endif // !DEFINES_H

@@ -1,14 +1,14 @@
 #include "game.h"
-#include "textureManager.h"
-#include "gameObject.h"
 
+TileMap* map;
 GameObject* player;
+
+SDL_Renderer* Game::renderer = nullptr;
 
 Game::Game()
 {
 	_running = false;
-	_window = NULL;
-	_renderer = NULL;
+	_window = nullptr;
 }
 
 Game::~Game()
@@ -17,7 +17,7 @@ Game::~Game()
 	SDL_Quit();
 }
 
-int Game::init(const char* title, int x, int y, int w, int h, bool fullScreen)
+int Game::Init(const char* title, int x, int y, int w, int h, bool fullScreen)
 {
 	int flags = 0;
 
@@ -40,24 +40,26 @@ int Game::init(const char* title, int x, int y, int w, int h, bool fullScreen)
 	}
 	std::cout << "Window Created..." << std::endl;
 
-	_renderer = SDL_CreateRenderer(_window, -1, 0);
+	renderer = SDL_CreateRenderer(_window, -1, 0);
 
-	if (!_renderer) 
+	if (!renderer)
 	{
 		std::cout << "ERROR: Can't create renderer..." << std::endl;
 		return -1;
 	}
 
-	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 	std::cout << "Renderer Created..." << std::endl;
 
 	_running = true;
 
-	player = new GameObject(SPRITE_TEXTURE, _renderer, 100, 100);
+	map = new TileMap();
+
+	player = new GameObject(SPRITE_TEXTURE, TILE_DIM * 12, TILE_DIM * 2);
 }
 
-void Game::handleEvents()
+void Game::HandleEvents()
 {
 	SDL_Event evt;
 	SDL_PollEvent(&evt);
@@ -71,26 +73,28 @@ void Game::handleEvents()
 	}
 }
 
-void Game::handleUpdates()
+void Game::HandleUpdates()
 {
-	player->handleUpdates();
+	player->HandleUpdates();
 }
 
-void Game::handleRenders()
+void Game::HandleRenders()
 {
 	// clear render buffer
-	SDL_RenderClear(_renderer);
+	SDL_RenderClear(renderer);
 
-	player->handleRenders();
+	map->DrawMap();
+
+	player->HandleRenders();
 
 	// present renderer
-	SDL_RenderPresent(_renderer);
+	SDL_RenderPresent(renderer);
 }
 
-void Game::clean()
+void Game::Clean()
 {
 	SDL_DestroyWindow(_window);
-	SDL_DestroyRenderer(_renderer);
+	SDL_DestroyRenderer(Game::renderer);
 	SDL_Quit();
 
 	std::cout << "Game Cleaned..." << std::endl;

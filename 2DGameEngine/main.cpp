@@ -4,29 +4,28 @@ Game* game = nullptr;
 
 int main(int argc, char* argv[]) 
 {
-	const int FPS = 60;
+	// FPS calculations and vars
 	const int frameDelay = 1000 / FPS;
-
 	Uint32 frameStart;
 	int frameTime;
 
 	game = new Game();
 
-	if (game->init(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_W, SCREEN_H, false) == -1) 
+	if (game->Init(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_W, SCREEN_H, FULLSCREEN) == -1) 
 	{
 		return -1;
 	}
 
-	while (game->running()) 
+	while (game->Running()) 
 	{
 		// get running time start for this frame
 		frameStart = SDL_GetTicks();
 
-		game->handleEvents();
+		game->HandleEvents();
 
-		game->handleUpdates();
+		game->HandleUpdates();
 
-		game->handleRenders();
+		game->HandleRenders();
 
 		// clock tick (frame time) - time in ms
 		frameTime = SDL_GetTicks() - frameStart;
@@ -37,7 +36,7 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	game->clean();
+	game->Clean();
 
 	return 0;
 }
