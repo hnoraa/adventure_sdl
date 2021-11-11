@@ -146,6 +146,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="math\vector2D.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="tileMap.cpp" />
   </ItemGroup>
@@ -158,8 +159,12 @@
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="global\defines.h" />
     <ClInclude Include="global\globals.h" />
+    <ClInclude Include="math\vector2D.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="tileMap.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

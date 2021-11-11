@@ -11,7 +11,7 @@ class SpriteComponent : public Component {
 public:
 	SpriteComponent() = default;
 	SpriteComponent(const char* path) {
-		_texture = TextureManager::LoadTexture(path);
+		SetTexture(path);
 	}
 
 	void Init() override {
@@ -27,12 +27,16 @@ public:
 
 	void Update() override {
 		// these are referenced from the postion components coordinates 
-		_dest.x = _transform->X();
-		_dest.y = _transform->Y();
+		_dest.x = (int)_transform->position.x;
+		_dest.y = (int)_transform->position.y;
 	}
 	
 	void Draw() override {
 		TextureManager::DrawTexture(_texture, _src, _dest);
+	}
+
+	void SetTexture(const char *path) {
+		_texture = TextureManager::LoadTexture(path);
 	}
 private:
 	TransformComponent* _transform;

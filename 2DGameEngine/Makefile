@@ -8,7 +8,7 @@ CFLAGS = -w
 LINKERFLAGS = -lSDL2 -lSDL2_image
 
 # objects
-OBJS = main.cpp game.cpp gameObject.cpp textureManager.cpp tileMap.cpp
+OBJS = main.cpp game.cpp gameObject.cpp textureManager.cpp tileMap.cpp ./math/vector2D.cpp
 
 # output (target)
 TARGET = engine

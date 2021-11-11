@@ -1,6 +1,7 @@
 #include "game.h"
 #include "textureManager.h"
 #include "tileMap.h"
+#include "vector2D.h"
 #include "ECS/components.h"
 
 TileMap* map;
@@ -83,8 +84,15 @@ void Game::HandleEvents()
 
 void Game::HandleUpdates()
 {
+	manager.Refresh();
 	manager.Update();
-	std::cout << "(" << player.GetComponent<TransformComponent>().X() << "," << player.GetComponent<TransformComponent>().Y() << ")" << std::endl;
+
+	player.GetComponent<TransformComponent>().position.Add(Vector2D(5, 0));
+
+	//std::cout << player.GetComponent<TransformComponent>().position. << std::endl;
+	if (player.GetComponent<TransformComponent>().position.x > 100) {
+		player.GetComponent<SpriteComponent>().SetTexture(PLAYER_TEXTURE);
+	}
 }
 
 void Game::HandleRenders()
