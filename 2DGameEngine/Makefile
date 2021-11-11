@@ -1,23 +1,24 @@
-# Build and clean
-
-# compiler stuff
+TARGET = runner
+BASEDIR = engine
+ECSDIR = $(BASEDIR)/ECS
+GLOBALDIR = $(BASEDIR)/global
+MATHDIR = $(BASEDIR)/math
+OBJS = main.cpp $(BASEDIR)/*.cpp $(MATHDIR)/*.cpp
+OUTDIR = ./bin
 CC = g++
-CFLAGS = -w
-
-# linker
+CLFAGS = -w
 LINKERFLAGS = -lSDL2 -lSDL2_image
 
-# objects
-BASEDIR = ./game/
-MATHDIR = math/
-OBJS = main.cpp $(BASEDIR)game.cpp $(BASEDIR)textureManager.cpp $(BASEDIR)tileMap.cpp $(BASEDIR)$(MATHDIR)vector2D.cpp
+# main target build (runs when make is typed)
+$(TARGET): $(OBJS)
+	$(CC) $(OBJS) $(CFLAGS) $(LINKERFLAGS) -o $(OUTDIR)/$(TARGET)
 
-# output (target)
-TARGET = engine
+# run the executable
+test:
+	clear
+	./$(OUTDIR)/$(TARGET)	
 
-# commands
-all: $(OBJS)
-	$(CC) $(OBJS) $(CFLAGS) $(LINKERFLAGS) -o $(TARGET)
-
-clean:
-	rm $(TARGET)
+# clean up the directory
+clean: 
+	clear
+	rm $(OUTDIR)/$(TARGET)
