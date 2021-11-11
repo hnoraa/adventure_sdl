@@ -8,7 +8,9 @@ CFLAGS = -w
 LINKERFLAGS = -lSDL2 -lSDL2_image
 
 # objects
-OBJS = main.cpp game.cpp textureManager.cpp tileMap.cpp ./math/vector2D.cpp
+BASEDIR = ./game/
+MATHDIR = math/
+OBJS = main.cpp $(BASEDIR)game.cpp $(BASEDIR)textureManager.cpp $(BASEDIR)tileMap.cpp $(BASEDIR)$(MATHDIR)vector2D.cpp
 
 # output (target)
 TARGET = engine
