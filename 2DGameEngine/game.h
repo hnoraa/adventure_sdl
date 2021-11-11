@@ -4,6 +4,7 @@
 #define GAME_H
 
 #include "global/defines.h"
+#include "tileMap.h"
 
 class Game
 {
