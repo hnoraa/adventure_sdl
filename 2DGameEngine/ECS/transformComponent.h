@@ -4,7 +4,7 @@
 #define TRANSFORM_COMPONENT_H
 
 #include "components.h"
-#include "../vector2D.h"
+#include "../math/vector2D.h"
 
 class TransformComponent : public Component {
 public:

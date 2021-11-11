@@ -1,7 +1,7 @@
 #include "game.h"
 #include "textureManager.h"
 #include "tileMap.h"
-#include "vector2D.h"
+#include "./math/vector2D.h"
 #include "ECS/components.h"
 
 TileMap* map;
