@@ -1,5 +1,6 @@
 #include "game.h"
 #include "textureManager.h"
+#include "tileMap.h"
 #include "ECS/components.h"
 
 TileMap* map;
