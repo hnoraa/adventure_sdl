@@ -56,9 +56,6 @@
     <ClInclude Include="ECS\ECS.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="ECS\positionComponent.h">
-      <Filter>Header Files\ECS</Filter>
-    </ClInclude>
     <ClInclude Include="ECS\spriteComponent.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
@@ -67,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="global\globals.h">
       <Filter>Header Files\globals</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\transformComponent.h">
+      <Filter>Header Files\ECS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

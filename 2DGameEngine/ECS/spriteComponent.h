@@ -16,7 +16,7 @@ public:
 
 	void Init() override {
 		// get a reference to the entities position component
-		_position = &entity->GetComponent<PositionComponent>();
+		_position = &entity->GetComponent<TransformComponent>();
 
 		// set up the SDL rects
 		_src.x = _src.y = 0;
@@ -35,7 +35,7 @@ public:
 		TextureManager::DrawTexture(_texture, _src, _dest);
 	}
 private:
-	PositionComponent* _position;
+	TransformComponent* _position;
 	SDL_Texture* _texture;
 	SDL_Rect _src;
 	SDL_Rect _dest;

@@ -1,18 +1,18 @@
 #pragma once
 
-#ifndef POSITION_COMPONENT_H
-#define POSITION_COMPONENT_H
+#ifndef TRANSFORM_COMPONENT_H
+#define TRANSFORM_COMPONENT_H
 
 #include "components.h"
 
-class PositionComponent : public Component {
+class TransformComponent : public Component {
 public:
-	PositionComponent() {
+	TransformComponent() {
 		_x = 0;
 		_y = 0;
 	}
 
-	PositionComponent(int x, int y) {
+	TransformComponent(int x, int y) {
 		_x = x;
 		_y = y;
 	}
@@ -39,4 +39,4 @@ private:
 	int _y;
 };
 
-#endif // !POSITION_COMPONENT_H
+#endif // !TRANSFORM_COMPONENT_H

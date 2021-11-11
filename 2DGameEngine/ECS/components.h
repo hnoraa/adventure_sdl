@@ -4,7 +4,7 @@
 #define COMPONENTS_H
 
 #include "ECS.h"
-#include "positionComponent.h"
+#include "transformComponent.h"
 #include "spriteComponent.h"
 
 #endif //!COMPONENTS_H

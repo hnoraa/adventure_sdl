@@ -152,7 +152,7 @@
   <ItemGroup>
     <ClInclude Include="ECS\components.h" />
     <ClInclude Include="ECS\ECS.h" />
-    <ClInclude Include="ECS\positionComponent.h" />
+    <ClInclude Include="ECS\transformComponent.h" />
     <ClInclude Include="ECS\spriteComponent.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameObject.h" />

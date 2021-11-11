@@ -61,7 +61,7 @@ int Game::Init(const char* title, int x, int y, int w, int h, bool fullScreen)
 	map = new TileMap();
 
 	// add position component to the new player entity
-	player.AddComponent<PositionComponent>(TILE_DIM * 12, TILE_DIM * 2);
+	player.AddComponent<TransformComponent>(TILE_DIM * 12, TILE_DIM * 2);
 	player.AddComponent<SpriteComponent>(PLAYER_TEXTURE);
 
 	return 0;
@@ -84,7 +84,7 @@ void Game::HandleEvents()
 void Game::HandleUpdates()
 {
 	manager.Update();
-	std::cout << "(" << player.GetComponent<PositionComponent>().X() << "," << player.GetComponent<PositionComponent>().Y() << ")" << std::endl;
+	std::cout << "(" << player.GetComponent<TransformComponent>().X() << "," << player.GetComponent<TransformComponent>().Y() << ")" << std::endl;
 }
 
 void Game::HandleRenders()
