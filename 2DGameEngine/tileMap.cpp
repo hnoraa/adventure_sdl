@@ -1,4 +1,5 @@
 #include "tileMap.h"
+#include "textureManager.h"
 
 /**
 * Level 1 - Default map, will be loaded from a file at some point
@@ -74,15 +75,15 @@ void TileMap::DrawMap()
 			switch (type) {
 			case 0:
 				// abyss
-				TextureManager::Draw(_abyss, _src, _dest);
+				TextureManager::DrawTexture(_abyss, _src, _dest);
 				break;
 			case 1:
 				// dirt
-				TextureManager::Draw(_dirt, _src, _dest);
+				TextureManager::DrawTexture(_dirt, _src, _dest);
 				break;
 			case 2:
 				// stone
-				TextureManager::Draw(_stone, _src, _dest);
+				TextureManager::DrawTexture(_stone, _src, _dest);
 				break;
 			};
 

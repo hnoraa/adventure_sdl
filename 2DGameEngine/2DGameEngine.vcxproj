@@ -150,14 +150,14 @@
     <ClCompile Include="tileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="defines.h" />
-    <ClInclude Include="ECS.h" />
     <ClInclude Include="ECS\components.h" />
+    <ClInclude Include="ECS\ECS.h" />
     <ClInclude Include="ECS\positionComponent.h" />
     <ClInclude Include="ECS\spriteComponent.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameObject.h" />
-    <ClInclude Include="globals.h" />
+    <ClInclude Include="global\defines.h" />
+    <ClInclude Include="global\globals.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="tileMap.h" />
   </ItemGroup>

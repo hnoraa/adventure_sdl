@@ -16,6 +16,9 @@
     <Filter Include="Header Files\ECS">
       <UniqueIdentifier>{81fca13d-1c64-49d4-9760-85ebcdfaeba5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\globals">
+      <UniqueIdentifier>{d61ac0f2-92be-48e3-a091-deb914b9ed95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -44,19 +47,13 @@
     <ClInclude Include="gameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="defines.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tileMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ECS\components.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="ECS.h">
+    <ClInclude Include="ECS\ECS.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
     <ClInclude Include="ECS\positionComponent.h">
@@ -64,6 +61,12 @@
     </ClInclude>
     <ClInclude Include="ECS\spriteComponent.h">
       <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="global\defines.h">
+      <Filter>Header Files\globals</Filter>
+    </ClInclude>
+    <ClInclude Include="global\globals.h">
+      <Filter>Header Files\globals</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
 #ifndef ECS_H
 #define ECS_H
 
-#include "defines.h"
+#include "../global/defines.h"
 #include <vector>
 #include <memory>
 #include <algorithm>

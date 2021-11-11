@@ -32,7 +32,7 @@ public:
 	}
 	
 	void Draw() override {
-		TextureManager::Draw(_texture, _src, _dest);
+		TextureManager::DrawTexture(_texture, _src, _dest);
 	}
 private:
 	PositionComponent* _position;

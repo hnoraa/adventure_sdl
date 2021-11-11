@@ -3,9 +3,8 @@
 #ifndef TILE_MAP_H
 #define TILE_MAP_H
 
-#include "defines.h"
+#include "global/defines.h"
 #include "game.h"
-#include "textureManager.h"
 
 class TileMap
 {

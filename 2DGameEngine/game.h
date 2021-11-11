@@ -3,11 +3,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-
-#include "defines.h"
-#include "textureManager.h"
-#include "tileMap.h"
-#include "ECS/components.h"
+#include "global/defines.h"
 
 class Game
 {

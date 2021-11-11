@@ -3,7 +3,7 @@
 #ifndef GAME_OBJECT_H
 #define GAME_OBJECT_H
 
-#include "defines.h"
+#include "global/defines.h"
 #include "game.h"
 #include "textureManager.h"
 
