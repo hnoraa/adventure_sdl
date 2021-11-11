@@ -1,4 +1,5 @@
 #pragma once
+
 #ifndef DEFINES_H
 
 #ifdef _WIN32

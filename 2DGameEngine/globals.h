@@ -1,4 +1,5 @@
 #pragma once
+
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
@@ -9,11 +10,11 @@
 #define FPS 60
 
 #define SPRITE_DIM 32
-#define SPRITE_TEXTURE "res/imgs/player.png"
+#define PLAYER_TEXTURE "res/imgs/player.png"
 
 #define TILE_DIM 32
 #define T_ABYSS "res/imgs/t_abyss.png"
 #define T_DIRT "res/imgs/t_dirt.png"
 #define T_STONE "res/imgs/t_stone.png"
 
-#endif
+#endif  // !GLOBALS_H

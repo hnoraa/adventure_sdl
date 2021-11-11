@@ -151,6 +151,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="defines.h" />
+    <ClInclude Include="ECS.h" />
+    <ClInclude Include="ECS\components.h" />
+    <ClInclude Include="ECS\positionComponent.h" />
+    <ClInclude Include="ECS\spriteComponent.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="globals.h" />

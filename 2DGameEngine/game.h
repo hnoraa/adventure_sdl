@@ -3,9 +3,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+
 #include "defines.h"
-#include "gameObject.h"
+#include "textureManager.h"
 #include "tileMap.h"
+#include "ECS/components.h"
 
 class Game
 {
@@ -35,6 +37,5 @@ private:
 
 	SDL_Window* _window;
 };
+
 #endif // !GAME_H
-
-

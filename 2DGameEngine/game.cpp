@@ -1,9 +1,11 @@
 #include "game.h"
+#include "ECS/spriteComponent.h"
 
 TileMap* map;
-GameObject* player;
 
 SDL_Renderer* Game::renderer = nullptr;
+Manager manager;
+auto& player(manager.AddEntity());	// create a player and add to the manager
 
 Game::Game()
 {
@@ -56,7 +58,11 @@ int Game::Init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 	map = new TileMap();
 
-	player = new GameObject(SPRITE_TEXTURE, TILE_DIM * 12, TILE_DIM * 2);
+	// add position component to the new player entity
+	player.AddComponent<PositionComponent>(TILE_DIM * 12, TILE_DIM * 2);
+	player.AddComponent<SpriteComponent>(PLAYER_TEXTURE);
+
+	return 0;
 }
 
 void Game::HandleEvents()
@@ -75,7 +81,8 @@ void Game::HandleEvents()
 
 void Game::HandleUpdates()
 {
-	player->HandleUpdates();
+	manager.Update();
+	std::cout << "(" << player.GetComponent<PositionComponent>().X() << "," << player.GetComponent<PositionComponent>().Y() << ")" << std::endl;
 }
 
 void Game::HandleRenders()
@@ -84,8 +91,7 @@ void Game::HandleRenders()
 	SDL_RenderClear(renderer);
 
 	map->DrawMap();
-
-	player->HandleRenders();
+	manager.Draw();
 
 	// present renderer
 	SDL_RenderPresent(renderer);

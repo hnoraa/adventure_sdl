@@ -23,4 +23,5 @@ private:
 	SDL_Rect _srcRect;
 	SDL_Rect _destRect;
 };
+
 #endif // !GAME_OBJECT_H
