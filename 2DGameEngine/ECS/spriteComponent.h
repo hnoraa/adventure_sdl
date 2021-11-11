@@ -3,7 +3,7 @@
 #ifndef SPRITE_COMPONENT_H
 #define SPRITE_COMPONENT_H
 
-#include "SDL.H"
+#include "../global/defines.h"
 #include "components.h"
 #include "../textureManager.h"
 
