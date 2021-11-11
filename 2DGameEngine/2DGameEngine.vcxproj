@@ -143,28 +143,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="gameObject.cpp" />
+    <ClCompile Include="engine\game.cpp" />
+    <ClCompile Include="engine\gameObject.cpp" />
+    <ClCompile Include="engine\math\vector2D.cpp" />
+    <ClCompile Include="engine\textureManager.cpp" />
+    <ClCompile Include="engine\tileMap.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="math\vector2D.cpp" />
-    <ClCompile Include="textureManager.cpp" />
-    <ClCompile Include="tileMap.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ECS\components.h" />
-    <ClInclude Include="ECS\ECS.h" />
-    <ClInclude Include="ECS\transformComponent.h" />
-    <ClInclude Include="ECS\spriteComponent.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="gameObject.h" />
-    <ClInclude Include="global\defines.h" />
-    <ClInclude Include="global\globals.h" />
-    <ClInclude Include="math\vector2D.h" />
-    <ClInclude Include="textureManager.h" />
-    <ClInclude Include="tileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="engine\ECS\components.h" />
+    <ClInclude Include="engine\ECS\ECS.h" />
+    <ClInclude Include="engine\ECS\keyboardController.h" />
+    <ClInclude Include="engine\ECS\spriteComponent.h" />
+    <ClInclude Include="engine\ECS\transformComponent.h" />
+    <ClInclude Include="engine\game.h" />
+    <ClInclude Include="engine\gameObject.h" />
+    <ClInclude Include="engine\global\defines.h" />
+    <ClInclude Include="engine\global\globals.h" />
+    <ClInclude Include="engine\math\vector2D.h" />
+    <ClInclude Include="engine\textureManager.h" />
+    <ClInclude Include="engine\tileMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

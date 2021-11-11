@@ -9,6 +9,9 @@
 class TransformComponent : public Component {
 public:
 	Vector2D position;
+	Vector2D velocity;
+
+	int speed = SPRITE_SPEED;
 
 	TransformComponent() {
 		position.x = 0.0f;
@@ -21,12 +24,13 @@ public:
 	}
 
 	void Init() override {
-		position.x = 0;
-		position.y = 0;
+		velocity.x = 0;
+		velocity.y = 0;
 	}
 
 	void Update() override {
-
+		position.x += velocity.x * speed;
+		position.y += velocity.y * speed;
 	}
 };
 

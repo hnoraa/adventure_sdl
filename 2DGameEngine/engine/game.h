@@ -28,6 +28,7 @@ public:
 	}
 
 	static SDL_Renderer* renderer;
+	static SDL_Event evt;
 private:
 	bool _running;
 

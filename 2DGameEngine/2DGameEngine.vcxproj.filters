@@ -13,16 +13,22 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\ECS">
+    <Filter Include="Header Files\engine">
+      <UniqueIdentifier>{115e8688-415d-43eb-897b-aa00fec8de4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\ECS">
       <UniqueIdentifier>{81fca13d-1c64-49d4-9760-85ebcdfaeba5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\globals">
+    <Filter Include="Header Files\engine\globals">
       <UniqueIdentifier>{d61ac0f2-92be-48e3-a091-deb914b9ed95}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\math">
+    <Filter Include="Header Files\engine\math">
       <UniqueIdentifier>{d8b0520d-6407-4ae7-a038-53ea9ec24ff4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\math">
+    <Filter Include="Source Files\engine">
+      <UniqueIdentifier>{e2e82076-235f-4127-b56d-f1596e183402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine\math">
       <UniqueIdentifier>{5e3d1e81-1091-428c-9d0a-c523a866638b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -30,58 +36,61 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="engine\game.cpp">
+      <Filter>Source Files\engine</Filter>
     </ClCompile>
-    <ClCompile Include="textureManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="engine\gameObject.cpp">
+      <Filter>Source Files\engine</Filter>
     </ClCompile>
-    <ClCompile Include="gameObject.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="engine\textureManager.cpp">
+      <Filter>Source Files\engine</Filter>
     </ClCompile>
-    <ClCompile Include="tileMap.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="engine\tileMap.cpp">
+      <Filter>Source Files\engine</Filter>
     </ClCompile>
-    <ClCompile Include="math\vector2D.cpp">
-      <Filter>Source Files\math</Filter>
+    <ClCompile Include="engine\math\vector2D.cpp">
+      <Filter>Source Files\engine\math</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="textureManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tileMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\components.h">
-      <Filter>Header Files\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\ECS.h">
-      <Filter>Header Files\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\spriteComponent.h">
-      <Filter>Header Files\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="global\defines.h">
-      <Filter>Header Files\globals</Filter>
-    </ClInclude>
-    <ClInclude Include="global\globals.h">
-      <Filter>Header Files\globals</Filter>
-    </ClInclude>
-    <ClInclude Include="ECS\transformComponent.h">
-      <Filter>Header Files\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="math\vector2D.h">
-      <Filter>Header Files\math</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="engine\ECS\components.h">
+      <Filter>Header Files\engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\ECS\ECS.h">
+      <Filter>Header Files\engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\ECS\keyboardController.h">
+      <Filter>Header Files\engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\ECS\spriteComponent.h">
+      <Filter>Header Files\engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\ECS\transformComponent.h">
+      <Filter>Header Files\engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\global\defines.h">
+      <Filter>Header Files\engine\globals</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\global\globals.h">
+      <Filter>Header Files\engine\globals</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\math\vector2D.h">
+      <Filter>Header Files\engine\math</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\game.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\textureManager.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\tileMap.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\gameObject.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

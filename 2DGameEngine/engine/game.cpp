@@ -6,7 +6,10 @@
 
 TileMap* map;
 
+// statics
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::evt;
+
 Manager manager;
 auto& player(manager.AddEntity());	// create a player and add to the manager
 
@@ -70,7 +73,6 @@ int Game::Init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 void Game::HandleEvents()
 {
-	SDL_Event evt;
 	SDL_PollEvent(&evt);
 
 	switch (evt.type) {

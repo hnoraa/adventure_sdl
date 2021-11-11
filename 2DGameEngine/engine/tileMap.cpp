@@ -85,6 +85,8 @@ void TileMap::DrawMap()
 				// stone
 				TextureManager::DrawTexture(_stone, _src, _dest);
 				break;
+			default:
+				break;
 			};
 
 		}

@@ -10,6 +10,7 @@
 #define FPS 60
 
 #define SPRITE_DIM 32
+#define SPRITE_SPEED 3
 #define PLAYER_TEXTURE "res/imgs/player.png"
 
 #define TILE_DIM 32
