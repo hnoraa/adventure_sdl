@@ -2,7 +2,7 @@
 
 Game* game = nullptr;
 
-int main(int argc, char* argv[]) 
+int main(int argc, char* argv[])
 {
 	// FPS calculations and vars
 	const int frameDelay = 1000 / FPS;
@@ -11,12 +11,12 @@ int main(int argc, char* argv[])
 
 	game = new Game();
 
-	if (game->Init(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_W, SCREEN_H, FULLSCREEN) == -1) 
+	if (game->Init(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_W, SCREEN_H, FULLSCREEN) == -1)
 	{
 		return -1;
 	}
 
-	while (game->Running()) 
+	while (game->Running())
 	{
 		// get running time start for this frame
 		frameStart = SDL_GetTicks();
@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 		// clock tick (frame time) - time in ms
 		frameTime = SDL_GetTicks() - frameStart;
 
-		if (frameDelay > frameTime) 
+		if (frameDelay > frameTime)
 		{
 			SDL_Delay(frameDelay - frameTime);
 		}

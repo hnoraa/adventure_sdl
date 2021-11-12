@@ -74,7 +74,7 @@ public:
 	template <typename T> bool HasComponent() const {
 		// query the entity to see if it has components
 		// of type T
-		return _componentBitSet[GetComponentTypeID<T>];
+		return _componentBitSet[GetComponentTypeID<T>()];
 	}
 
 	// this function returns a reference to T (designation: T&)

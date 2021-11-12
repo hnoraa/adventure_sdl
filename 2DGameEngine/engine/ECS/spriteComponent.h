@@ -14,21 +14,30 @@ public:
 		SetTexture(path);
 	}
 
+	~SpriteComponent() {
+		SDL_DestroyTexture(_texture);
+	}
+
 	void Init() override {
 		// get a reference to the entities position component
 		_transform = &entity->GetComponent<TransformComponent>();
 
 		// set up the SDL rects
 		_src.x = _src.y = 0;
-		_src.w = _src.h = SPRITE_DIM;
+		_src.w = _transform->w;
+		_src.h = _transform->h;
 
-		_dest.w = _dest.h = (SPRITE_DIM * 2);
+		_dest.w = _transform->w;
+		_dest.h = _transform->h;
 	}
 
 	void Update() override {
 		// these are referenced from the postion components coordinates 
 		_dest.x = (int)_transform->position.x;
 		_dest.y = (int)_transform->position.y;
+
+		_dest.w = _transform->w * _transform->scale;
+		_dest.h = _transform->h * _transform->scale;
 	}
 	
 	void Draw() override {

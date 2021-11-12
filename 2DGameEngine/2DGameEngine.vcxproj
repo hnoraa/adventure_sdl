@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\collision.cpp" />
     <ClCompile Include="engine\game.cpp" />
     <ClCompile Include="engine\gameObject.cpp" />
     <ClCompile Include="engine\math\vector2D.cpp" />
@@ -154,6 +155,8 @@
     <None Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\collision.h" />
+    <ClInclude Include="engine\ECS\colliderComponent.h" />
     <ClInclude Include="engine\ECS\components.h" />
     <ClInclude Include="engine\ECS\ECS.h" />
     <ClInclude Include="engine\ECS\keyboardController.h" />

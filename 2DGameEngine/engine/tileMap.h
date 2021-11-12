@@ -12,7 +12,8 @@ public:
 	TileMap();
 	~TileMap();
 
-	void LoadMap(int mapArray[20][25]);
+	void LoadMap(int mapArray[MAP_H][MAP_W]);
+	void FlipMap(int mapArray[MAP_H][MAP_W]);
 	void DrawMap();
 
 private:

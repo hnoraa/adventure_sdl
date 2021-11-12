@@ -51,14 +51,14 @@
     <ClCompile Include="engine\math\vector2D.cpp">
       <Filter>Source Files\engine\math</Filter>
     </ClCompile>
+    <ClCompile Include="engine\collision.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine\ECS\components.h">
-      <Filter>Header Files\engine\ECS</Filter>
-    </ClInclude>
     <ClInclude Include="engine\ECS\ECS.h">
       <Filter>Header Files\engine\ECS</Filter>
     </ClInclude>
@@ -91,6 +91,15 @@
     </ClInclude>
     <ClInclude Include="engine\gameObject.h">
       <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\ECS\colliderComponent.h">
+      <Filter>Header Files\engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\collision.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\ECS\components.h">
+      <Filter>Header Files\engine\ECS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

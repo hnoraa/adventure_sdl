@@ -3,6 +3,7 @@
 #include "tileMap.h"
 #include "./math/vector2D.h"
 #include "ECS/components.h"
+#include "collision.h"
 
 TileMap* map;
 
@@ -12,6 +13,7 @@ SDL_Event Game::evt;
 
 Manager manager;
 auto& player(manager.AddEntity());	// create a player and add to the manager
+auto& wall(manager.AddEntity());	// wall to collide with
 
 Game::Game()
 {
@@ -31,7 +33,7 @@ int Game::Init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 	if (fullScreen) flags = SDL_WINDOW_FULLSCREEN;
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) 
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		std::cout << "ERROR: Can't initialize subsystems..." << std::endl;
 		return -1;
@@ -41,7 +43,7 @@ int Game::Init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 	_window = SDL_CreateWindow(title, x, y, w, h, flags);
 
-	if (!_window) 
+	if (!_window)
 	{
 		std::cout << "ERROR: Can't create window..." << std::endl;
 		return -1;
@@ -64,9 +66,16 @@ int Game::Init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 	map = new TileMap();
 
-	// add position component to the new player entity
-	player.AddComponent<TransformComponent>(TILE_DIM * 12, TILE_DIM * 2);
+	// add components to the new player entity
+	player.AddComponent<TransformComponent>(2);
 	player.AddComponent<SpriteComponent>(PLAYER_TEXTURE);
+	player.AddComponent<KeyboardController>();
+	player.AddComponent<ColliderComponent>("player");
+
+	// wall components
+	wall.AddComponent<TransformComponent>(300.0f, 300.0f, 280, 20, 1);
+	wall.AddComponent<SpriteComponent>(DEBUG_TEXTURE);
+	wall.AddComponent<ColliderComponent>("wall");
 
 	return 0;
 }
@@ -89,11 +98,9 @@ void Game::HandleUpdates()
 	manager.Refresh();
 	manager.Update();
 
-	player.GetComponent<TransformComponent>().position.Add(Vector2D(5, 0));
-
-	//std::cout << player.GetComponent<TransformComponent>().position. << std::endl;
-	if (player.GetComponent<TransformComponent>().position.x > 100) {
-		player.GetComponent<SpriteComponent>().SetTexture(PLAYER_TEXTURE);
+	if (Collision::AABB(player.GetComponent<ColliderComponent>().collider, wall.GetComponent<ColliderComponent>().collider)) {
+		player.GetComponent<TransformComponent>().scale = 1;
+		std::cout << "Wall hit!" << std::endl;
 	}
 }
 
