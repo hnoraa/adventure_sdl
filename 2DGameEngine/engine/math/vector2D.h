@@ -31,6 +31,12 @@ public:
 	Vector2D& operator*= (const Vector2D& vec);
 	Vector2D& operator/= (const Vector2D& vec);
 
+	// multiply the vector by a scaling number
+	Vector2D& operator*(const int& i);
+
+	// zero out the vectors
+	Vector2D& Zero();
+
 	// override output stream
 	friend std::ostream& operator<<(std::ostream& stream, const Vector2D& vec);
 };

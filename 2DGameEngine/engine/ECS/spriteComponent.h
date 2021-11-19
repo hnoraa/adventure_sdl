@@ -33,8 +33,8 @@ public:
 
 	void Update() override {
 		// these are referenced from the postion components coordinates 
-		_dest.x = (int)_transform->position.x;
-		_dest.y = (int)_transform->position.y;
+		_dest.x = static_cast<int> (_transform->position.x);
+		_dest.y = static_cast<int> (_transform->position.y);
 
 		_dest.w = _transform->w * _transform->scale;
 		_dest.h = _transform->h * _transform->scale;

@@ -4,6 +4,10 @@
 #define GAME_H
 
 #include "global/defines.h"
+#include <vector>
+
+// forward declaration of ColliderComponent because it's not compiled at this point
+class ColliderComponent;
 
 class Game
 {
@@ -27,8 +31,12 @@ public:
 		return _running;
 	}
 
+	static void AddTile(int id, int x, int y);
+
 	static SDL_Renderer* renderer;
 	static SDL_Event evt;
+
+	static std::vector<ColliderComponent*> colliders;
 private:
 	bool _running;
 

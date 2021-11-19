@@ -18,13 +18,11 @@ public:
 	int speed = SPRITE_SPEED;
 
 	TransformComponent() {
-		position.x = 0.0f;
-		position.y = 0.0f;
+		position.Zero();
 	}
 
 	TransformComponent(int scale) {
-		position.x = 0.0f;
-		position.y = 0.0f;
+		position.Zero();
 
 		this->scale = scale;
 	}
@@ -44,8 +42,7 @@ public:
 	}
 
 	void Init() override {
-		velocity.x = 0;
-		velocity.y = 0;
+		velocity.Zero();
 	}
 
 	void Update() override {

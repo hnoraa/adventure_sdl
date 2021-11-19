@@ -1,60 +1,40 @@
 #include "tileMap.h"
 #include "textureManager.h"
-
-/**
-* Level 1 - Default map, will be loaded from a file at some point
-* 0 = abyss
-* 1 = dirt
-* 2 = stone
-**/
-int lvl1[MAP_H][MAP_W] = {
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0},
-	{0,0,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,2,0,0},
-	{0,0,0,0,0,0,0,0,0,0,2,1,1,2,0,0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,2,1,1,2,0,0,0,0,0,0,0,0,0,0,0}
-};
+#include "game.h"
+#include <fstream>
 
 TileMap::TileMap()
 {
-	_abyss = TextureManager::LoadTexture(T_ABYSS);
-	_dirt = TextureManager::LoadTexture(T_DIRT);
-	_stone = TextureManager::LoadTexture(T_STONE);
-
-	LoadMap(lvl1);
-	FlipMap(lvl1);
-
-	// coordinates
-	_src.x = _src.y = 0;
-	_dest.x = _dest.y = 0;
-
-	// dimensions
-	_src.w = _src.h = TILE_DIM;
-	_dest.w = _dest.h = TILE_DIM;
 }
 
 TileMap::~TileMap()
 {
-	SDL_DestroyTexture(_abyss);
-	SDL_DestroyTexture(_dirt);
-	SDL_DestroyTexture(_stone);
 }
 
+void TileMap::LoadMap(std::string mapFile, int sizeX, int sizeY)
+{
+	char tile;
+	std::fstream stream;
+	stream.open(mapFile);
+
+	// parse the file
+	for (int y = 0; y < sizeY; y++) {
+		for (int x = 0; x < sizeX; x++) {
+			// get the tile character
+			stream.get(tile);
+
+			// add to the game
+			Game::AddTile(atoi(&tile), x * TILE_DIM, y * TILE_DIM);
+
+			// ignore the comma
+			stream.ignore();
+		}
+	}
+
+	stream.close();
+}
+
+/*
 void TileMap::LoadMap(int mapArray[MAP_H][MAP_W])
 {
 	for (int row = 0; row < MAP_H; row++) {
@@ -103,3 +83,4 @@ void TileMap::DrawMap()
 		}
 	}
 }
+*/

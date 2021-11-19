@@ -101,5 +101,8 @@
     <ClInclude Include="engine\ECS\components.h">
       <Filter>Header Files\engine\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="engine\ECS\tileComponent.h">
+      <Filter>Header Files\engine\ECS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
