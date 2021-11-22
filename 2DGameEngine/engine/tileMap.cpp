@@ -18,8 +18,10 @@ void TileMap::LoadMap(std::string mapFile, int sizeX, int sizeY)
 	stream.open(mapFile);
 
 	// parse the file
-	for (int y = 0; y < sizeY; y++) {
-		for (int x = 0; x < sizeX; x++) {
+	for (int y = 0; y < sizeY; y++) 
+	{
+		for (int x = 0; x < sizeX; x++) 
+		{
 			// get the tile character
 			stream.get(tile);
 

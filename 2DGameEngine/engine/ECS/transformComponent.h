@@ -6,7 +6,8 @@
 #include "components.h"
 #include "../math/vector2D.h"
 
-class TransformComponent : public Component {
+class TransformComponent : public Component
+{
 public:
 	Vector2D position;
 	Vector2D velocity;
@@ -17,22 +18,26 @@ public:
 
 	int speed = SPRITE_SPEED;
 
-	TransformComponent() {
+	TransformComponent()
+	{
 		position.Zero();
 	}
 
-	TransformComponent(int scale) {
+	TransformComponent(int scale)
+	{
 		position.Zero();
 
 		this->scale = scale;
 	}
 
-	TransformComponent(float x, float y) {
+	TransformComponent(float x, float y)
+	{
 		position.x = x;
 		position.y = y;
 	}
 
-	TransformComponent(float x, float y, int h, int w, int scale) {
+	TransformComponent(float x, float y, int h, int w, int scale)
+	{
 		position.x = x;
 		position.y = y;
 
@@ -41,11 +46,13 @@ public:
 		this->scale = scale;
 	}
 
-	void Init() override {
+	void Init() override
+	{
 		velocity.Zero();
 	}
 
-	void Update() override {
+	void Update() override
+	{
 		position.x += velocity.x * speed;
 		position.y += velocity.y * speed;
 	}

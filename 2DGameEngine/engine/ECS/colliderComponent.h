@@ -7,20 +7,24 @@
 #include "../global/defines.h"
 #include "components.h"
 
-class ColliderComponent : public Component {
+class ColliderComponent : public Component
+{
 public:
 	SDL_Rect collider;
 	std::string tag;
 	TransformComponent* transform;
 
 	ColliderComponent() = default;
-	ColliderComponent(std::string tag) {
+	ColliderComponent(std::string tag)
+	{
 		this->tag = tag;
 	}
 
-	void Init() override {
+	void Init() override
+	{
 		// check to see that this entity actually has a Transform component, if not add
-		if (!entity->HasComponent<TransformComponent>()) {
+		if (!entity->HasComponent<TransformComponent>())
+		{
 			entity->AddComponent<TransformComponent>();
 		}
 
@@ -30,7 +34,8 @@ public:
 		Game::colliders.push_back(this);
 	}
 
-	void Update() override {
+	void Update() override
+	{
 		// update colliders position and size each frame
 		collider.x = static_cast<int>(transform->position.x);
 		collider.y = static_cast<int>(transform->position.y);

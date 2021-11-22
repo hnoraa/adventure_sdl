@@ -7,18 +7,22 @@
 #include "components.h"
 #include "../textureManager.h"
 
-class SpriteComponent : public Component {
+class SpriteComponent : public Component
+{
 public:
 	SpriteComponent() = default;
-	SpriteComponent(const char* path) {
+	SpriteComponent(const char* path)
+	{
 		SetTexture(path);
 	}
 
-	~SpriteComponent() {
+	~SpriteComponent()
+	{
 		SDL_DestroyTexture(_texture);
 	}
 
-	void Init() override {
+	void Init() override
+	{
 		// get a reference to the entities position component
 		_transform = &entity->GetComponent<TransformComponent>();
 
@@ -31,7 +35,8 @@ public:
 		_dest.h = _transform->h;
 	}
 
-	void Update() override {
+	void Update() override
+	{
 		// these are referenced from the postion components coordinates 
 		_dest.x = static_cast<int> (_transform->position.x);
 		_dest.y = static_cast<int> (_transform->position.y);
@@ -39,12 +44,14 @@ public:
 		_dest.w = _transform->w * _transform->scale;
 		_dest.h = _transform->h * _transform->scale;
 	}
-	
-	void Draw() override {
+
+	void Draw() override
+	{
 		TextureManager::DrawTexture(_texture, _src, _dest);
 	}
 
-	void SetTexture(const char *path) {
+	void SetTexture(const char* path)
+	{
 		_texture = TextureManager::LoadTexture(path);
 	}
 private:

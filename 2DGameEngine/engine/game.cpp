@@ -95,7 +95,8 @@ void Game::HandleEvents()
 {
 	SDL_PollEvent(&evt);
 
-	switch (evt.type) {
+	switch (evt.type) 
+	{
 	case SDL_QUIT:
 		_running = false;
 		break;
@@ -109,8 +110,10 @@ void Game::HandleUpdates()
 	manager.Refresh();
 	manager.Update();
 
-	for (auto collide : colliders) {
-		if (collide->tag != "player") {
+	for (auto collide : colliders) 
+	{
+		if (collide->tag != "player") 
+		{
 			Collision::AABB(player.GetComponent<ColliderComponent>(), *collide);
 		}
 	}
@@ -136,4 +139,3 @@ void Game::Clean()
 
 	std::cout << "Game Cleaned..." << std::endl;
 }
-

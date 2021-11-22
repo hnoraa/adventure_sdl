@@ -12,7 +12,6 @@ public:
 	TileMap();
 	~TileMap();
 
-
 	static void LoadMap(std::string mapFile, int sizeX, int sizeY);
 	// void LoadMap(int mapArray[MAP_H][MAP_W]);
 	// void FlipMap(int mapArray[MAP_H][MAP_W]);

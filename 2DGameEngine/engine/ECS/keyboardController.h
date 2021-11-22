@@ -6,20 +6,25 @@
 #include "../game.h"
 #include "components.h"
 
-class KeyboardController : public Component {
+class KeyboardController : public Component
+{
 public:
 	TransformComponent* transform;
 
-	void Init() override {
+	void Init() override
+	{
 		// get the transform component of the parent entity
 		transform = &entity->GetComponent<TransformComponent>();
 	}
 
-	void Update() override {
+	void Update() override
+	{
 		// get key presses
-		if (Game::evt.type == SDL_KEYDOWN) {
+		if (Game::evt.type == SDL_KEYDOWN)
+		{
 			// start key press operation
-			switch (Game::evt.key.keysym.sym) {
+			switch (Game::evt.key.keysym.sym)
+			{
 			case SDLK_UP:
 				transform->velocity.y = -1;	// moving up
 				break;
@@ -37,9 +42,11 @@ public:
 			}
 		}
 
-		if (Game::evt.type == SDL_KEYUP) {
+		if (Game::evt.type == SDL_KEYUP)
+		{
 			// stop key press operation (ex. stop moving)
-			switch (Game::evt.key.keysym.sym) {
+			switch (Game::evt.key.keysym.sym)
+			{
 			case SDLK_UP:
 				transform->velocity.y = 0;	// moving up
 				break;
@@ -58,4 +65,5 @@ public:
 		}
 	}
 };
+
 #endif // !KEYBOARD_CONTROLLER_H

@@ -19,14 +19,16 @@ class Entity;
 using ComponentID = std::size_t;
 
 // puts this function code where we use the function
-inline ComponentID GetComponentTypeID() {
+inline ComponentID GetComponentTypeID()
+{
 	// setting it to static will remember what the last value of it is
 	// 1st time 1, 2nd time 2 etc...
 	static ComponentID lastID = 0;
 	return lastID++;
 }
 
-template <typename T> inline ComponentID GetComponentTypeID() noexcept {
+template <typename T> inline ComponentID GetComponentTypeID() noexcept
+{
 	static ComponentID typeID = GetComponentTypeID(); // generates a new lastID
 	return typeID;
 }
@@ -36,7 +38,8 @@ constexpr std::size_t maxComponents = 32;
 using ComponentBitSet = std::bitset<maxComponents>;	// find if an entity has a selection of components
 using ComponentArray = std::array<Component*, maxComponents>;	// array of component pointers
 
-class Component {
+class Component
+{
 public:
 	Entity* entity;	// reference to its owner
 
@@ -47,38 +50,47 @@ public:
 	virtual ~Component() {}
 };
 
-class Entity {
+class Entity
+{
 public:
-	void Update() {
+	void Update()
+	{
 		// loop through entities components vector
-		for (auto& c : _components) {
+		for (auto& c : _components)
+		{
 			c->Update();
 		}
 	}
 
-	void Draw() {
+	void Draw()
+	{
 		// loop through entities components vector
-		for (auto& c : _components) {
+		for (auto& c : _components)
+		{
 			c->Draw();
 		}
 	}
 
-	bool IsActive() const {
+	bool IsActive() const
+	{
 		return _active;
 	}
 
-	void Destroy() {
+	void Destroy()
+	{
 		_active = false;	// removed
 	}
 
-	template <typename T> bool HasComponent() const {
+	template <typename T> bool HasComponent() const
+	{
 		// query the entity to see if it has components
 		// of type T
 		return _componentBitSet[GetComponentTypeID<T>()];
 	}
 
 	// this function returns a reference to T (designation: T&)
-	template <typename T, typename... TArgs> T& AddComponent(TArgs&&... mArgs) {
+	template <typename T, typename... TArgs> T& AddComponent(TArgs&&... mArgs)
+	{
 		// create a new component
 		T* c(new T(std::forward<TArgs>(mArgs)...));
 
@@ -101,7 +113,8 @@ public:
 	}
 
 	// this function returns a reference to T (designation: T&)
-	template <typename T> T& GetComponent() const {
+	template <typename T> T& GetComponent() const
+	{
 		// set a pointer to the position in the componentArray
 		auto ptr(_componentArray[GetComponentTypeID<T>()]);
 
@@ -115,23 +128,29 @@ private:
 };
 
 // manages entities
-class Manager {
+class Manager
+{
 public:
-	void Update() {
+	void Update()
+	{
 		// run the update functions of all entities
-		for (auto& e : _entities) {
+		for (auto& e : _entities)
+		{
 			e->Update();
 		}
 	}
 
-	void Draw() {
+	void Draw()
+	{
 		// run the draw functions of all entities
-		for (auto& e : _entities) {
+		for (auto& e : _entities)
+		{
 			e->Draw();
 		}
 	}
 
-	void Refresh() {
+	void Refresh()
+	{
 		// loop through all entities and remove if not active
 		_entities.erase(std::remove_if(std::begin(_entities), std::end(_entities), [](const std::unique_ptr<Entity>& mEntity)
 			{
@@ -139,7 +158,8 @@ public:
 			}), std::end(_entities));
 	}
 
-	Entity& AddEntity() {
+	Entity& AddEntity()
+	{
 		// add a new entity and return the reference to it
 		Entity* e = new Entity();
 		std::unique_ptr<Entity> uPtr{ e };	// create a unique pointer initialized to e (Entity pointer)
@@ -150,4 +170,5 @@ public:
 private:
 	std::vector<std::unique_ptr<Entity>> _entities;	// vector that holds all of the entities
 };
+
 #endif // !ECS_H

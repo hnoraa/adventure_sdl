@@ -7,7 +7,8 @@
 #include "../global/defines.h"
 #include "../textureManager.h"
 
-class TileComponent : public Component {
+class TileComponent : public Component
+{
 public:
 	TransformComponent* transform;
 	SpriteComponent* sprite;
@@ -17,7 +18,8 @@ public:
 
 	TileComponent() = default;
 
-	TileComponent(int x, int y, int w, int h, int id) {
+	TileComponent(int x, int y, int w, int h, int id)
+	{
 		tileRect.x = x;
 		tileRect.y = y;
 		tileRect.w = w;
@@ -25,7 +27,8 @@ public:
 
 		tileId = id;
 
-		switch (tileId) {
+		switch (tileId)
+		{
 		case 0:
 			path = T_ABYSS;
 			break;
@@ -40,7 +43,8 @@ public:
 		}
 	}
 
-	void Init() override {
+	void Init() override
+	{
 		entity->AddComponent<TransformComponent>((float)tileRect.x, (float)tileRect.y, tileRect.w, tileRect.h, 1);
 		transform = &entity->GetComponent<TransformComponent>();
 
