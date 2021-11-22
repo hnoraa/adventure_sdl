@@ -37,6 +37,9 @@ public:
 			case SDLK_RIGHT:
 				transform->velocity.x = 1;	// moving right
 				break;
+			case SDLK_ESCAPE:
+				// quit
+				Game::evt.type = SDL_QUIT;
 			default:
 				break;
 			}
