@@ -39,7 +39,10 @@ public:
 				break;
 			case SDLK_ESCAPE:
 				// quit
-				Game::evt.type = SDL_QUIT;
+				if (DEBUG)
+				{
+					Game::evt.type = SDL_QUIT;
+				}
 			default:
 				break;
 			}

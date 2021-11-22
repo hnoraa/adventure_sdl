@@ -5,7 +5,7 @@
 #include "ECS/components.h"
 #include "collision.h"
 
-TileMap* map;
+//TileMap* map;
 
 // statics
 SDL_Renderer* Game::renderer = nullptr;
@@ -17,6 +17,15 @@ std::vector<ColliderComponent*> Game::colliders;
 Manager manager;
 auto& player(manager.AddEntity());	// create a player and add to the manager
 auto& wall(manager.AddEntity());	// wall to collide with
+
+// group label enum
+enum groupLabels : std::size_t
+{
+	MAP,
+	PLAYERS,
+	ENEMIES,
+	COLLIDERS
+};
 
 Game::Game()
 {
@@ -30,11 +39,11 @@ Game::~Game()
 	SDL_Quit();
 }
 
-int Game::Init(const char* title, int x, int y, int w, int h, bool fullScreen)
+int Game::Init(const char* mTitle, int mX, int mY, int mW, int mH, bool mFullScreen)
 {
 	int flags = 0;
 
-	if (fullScreen) flags = SDL_WINDOW_FULLSCREEN;
+	if (mFullScreen) flags = SDL_WINDOW_FULLSCREEN;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
@@ -44,7 +53,7 @@ int Game::Init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 	std::cout << "Subsystems Initialized..." << std::endl;
 
-	_window = SDL_CreateWindow(title, x, y, w, h, flags);
+	_window = SDL_CreateWindow(mTitle, mX, mY, mW, mH, flags);
 
 	if (!_window)
 	{
@@ -67,28 +76,31 @@ int Game::Init(const char* title, int x, int y, int w, int h, bool fullScreen)
 
 	_running = true;
 
-	map = new TileMap();
+	//map = new TileMap();
 
 	// add components to the new player entity
-	TileMap::LoadMap("res/maps/lvl1.map", MAP_W, MAP_H);
+	TileMap::LoadMap(MAP_FILE, MAP_W, MAP_H);
 
 	player.AddComponent<TransformComponent>(2);
 	player.AddComponent<SpriteComponent>(PLAYER_TEXTURE);
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
+	player.AddGroup(PLAYERS);
 
 	// wall components
-	wall.AddComponent<TransformComponent>(300.0f, 300.0f, 280, 20, 1);
+	wall.AddComponent<TransformComponent>(300.0f, 300.0f, 20, 280, 1);
 	wall.AddComponent<SpriteComponent>(DEBUG_TEXTURE);
 	wall.AddComponent<ColliderComponent>("wall");
+	wall.AddGroup(MAP);
 
 	return 0;
 }
 
-void Game::AddTile(int id, int x, int y)
+void Game::AddTile(int mId, int mX, int mY)
 {
 	auto& tile(manager.AddEntity());
-	tile.AddComponent<TileComponent>(x, y, TILE_DIM, TILE_DIM, id);
+	tile.AddComponent<TileComponent>(mX, mY, TILE_DIM, TILE_DIM, mId);
+	tile.AddGroup(MAP);
 }
 
 void Game::HandleEvents()
@@ -119,13 +131,45 @@ void Game::HandleUpdates()
 	}
 }
 
+// create the group object lists for rendering
+auto& lTiles(manager.GetGroup(MAP));
+auto& lPlayers(manager.GetGroup(PLAYERS));
+auto& lEnemies(manager.GetGroup(ENEMIES));
+auto& lColliders(manager.GetGroup(COLLIDERS));
+
 void Game::HandleRenders()
 {
 	// clear render buffer
 	SDL_RenderClear(renderer);
 
 	//map->DrawMap();
-	manager.Draw();
+	//manager.Draw();
+
+	// draw the object lists from the groups
+
+	// draw tiles (map)
+	for (auto& mX : lTiles)
+	{
+		mX->Draw();
+	}
+
+	// draw players
+	for (auto& mX : lPlayers)
+	{
+		mX->Draw();
+	}
+
+	// draw enemies
+	for (auto& mX : lEnemies)
+	{
+		mX->Draw();
+	}
+
+	// draw colliders
+	for (auto& mX : colliders)
+	{
+		mX->Draw();
+	}
 
 	// present renderer
 	SDL_RenderPresent(renderer);

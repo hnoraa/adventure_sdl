@@ -12,8 +12,8 @@ class Collision
 {
 public:
 	// Axis-Aligned Bounding-Box collision
-	static bool AABB(const SDL_Rect& a, const SDL_Rect& b);
-	static bool AABB(const ColliderComponent& a, ColliderComponent& b);
+	static bool AABB(const SDL_Rect& mA, const SDL_Rect& mB);
+	static bool AABB(const ColliderComponent& mA, ColliderComponent& mB);
 };
 
 #endif // !COLLISION_H

@@ -10,7 +10,7 @@
 class GameObject
 {
 public:
-	GameObject(const char *textureSheet, int x, int y);
+	GameObject(const char *mTextureSheet, int mX, int mY);
 	~GameObject();
 
 	void HandleUpdates();

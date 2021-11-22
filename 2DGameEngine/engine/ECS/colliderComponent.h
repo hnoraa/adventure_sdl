@@ -15,9 +15,9 @@ public:
 	TransformComponent* transform;
 
 	ColliderComponent() = default;
-	ColliderComponent(std::string tag)
+	ColliderComponent(std::string mTag)
 	{
-		this->tag = tag;
+		tag = mTag;
 	}
 
 	void Init() override

@@ -11,16 +11,16 @@ TileMap::~TileMap()
 {
 }
 
-void TileMap::LoadMap(std::string mapFile, int sizeX, int sizeY)
+void TileMap::LoadMap(std::string mMapFile, int mSizeX, int mSizeY)
 {
 	char tile;
 	std::fstream stream;
-	stream.open(mapFile);
+	stream.open(mMapFile);
 
 	// parse the file
-	for (int y = 0; y < sizeY; y++) 
+	for (int y = 0; y < mSizeY; y++) 
 	{
-		for (int x = 0; x < sizeX; x++) 
+		for (int x = 0; x < mSizeX; x++) 
 		{
 			// get the tile character
 			stream.get(tile);

@@ -2,12 +2,12 @@
 #include "ECS\colliderComponent.h"
 
 // Axis-Aligned Bounding-Box collision
-bool Collision::AABB(const SDL_Rect& a, const SDL_Rect& b) 
+bool Collision::AABB(const SDL_Rect& mA, const SDL_Rect& mB) 
 {
-	if ((a.x + a.w) >= b.x 
-		&& (b.x + b.w) >= a.x 
-		&& (a.y + a.h) >= b.y 
-		&& (b.y + b.h) >= b.y) 
+	if ((mA.x + mA.w) >= mB.x 
+		&& (mB.x + mB.w) >= mA.x 
+		&& (mA.y + mA.h) >= mB.y 
+		&& (mB.y + mB.h) >= mB.y) 
 	{
 		return true;
 	}
@@ -16,11 +16,11 @@ bool Collision::AABB(const SDL_Rect& a, const SDL_Rect& b)
 	return false;
 }
 
-bool Collision::AABB(const ColliderComponent& a, ColliderComponent& b)
+bool Collision::AABB(const ColliderComponent& mA, ColliderComponent& mB)
 {
-	if (AABB(a.collider, b.collider)) 
+	if (AABB(mA.collider, mB.collider)) 
 	{
-		std::cout << a.tag << " hit " << b.tag << std::endl;
+		std::cout << mA.tag << " hit " << mB.tag << std::endl;
 		return true;
 	}
 

@@ -23,27 +23,26 @@ public:
 		position.Zero();
 	}
 
-	TransformComponent(int scale)
+	TransformComponent(int mScale)
 	{
 		position.Zero();
-
-		this->scale = scale;
+		scale = mScale;
 	}
 
-	TransformComponent(float x, float y)
+	TransformComponent(float mX, float mY)
 	{
-		position.x = x;
-		position.y = y;
+		position.x = mX;
+		position.y = mY;
 	}
 
-	TransformComponent(float x, float y, int h, int w, int scale)
+	TransformComponent(float mX, float mY, int mH, int mW, int mScale)
 	{
-		position.x = x;
-		position.y = y;
+		position.x = mX;
+		position.y = mY;
 
-		this->h = h;
-		this->w = w;
-		this->scale = scale;
+		h = mH;
+		w = mW;
+		scale = mScale;
 	}
 
 	void Init() override

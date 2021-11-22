@@ -13,30 +13,35 @@
 // forward class defs so the compiler knows these classes exist but havent been defined yet
 class Component;
 class Entity;
+class Manager;
 
 // create a ComponentID type that is of std::size_t
 // this will be used to identify all components
 using ComponentID = std::size_t;
+using Group = std::size_t;
 
 // puts this function code where we use the function
-inline ComponentID GetComponentTypeID()
+inline ComponentID GetNewComponentTypeID()
 {
 	// setting it to static will remember what the last value of it is
 	// 1st time 1, 2nd time 2 etc...
-	static ComponentID lastID = 0;
+	static ComponentID lastID = 0u;	// unsigned
 	return lastID++;
 }
 
 template <typename T> inline ComponentID GetComponentTypeID() noexcept
 {
-	static ComponentID typeID = GetComponentTypeID(); // generates a new lastID
+	static ComponentID typeID = GetNewComponentTypeID(); // generates a new lastID
 	return typeID;
 }
 
 // number of components an entity can hold
 constexpr std::size_t maxComponents = 32;
+constexpr std::size_t maxGroups = 32;
+
 using ComponentBitSet = std::bitset<maxComponents>;	// find if an entity has a selection of components
 using ComponentArray = std::array<Component*, maxComponents>;	// array of component pointers
+using GroupBitSet = std::bitset<maxGroups>;	// find if an entity has a selection of groups
 
 class Component
 {
@@ -53,6 +58,8 @@ public:
 class Entity
 {
 public:
+	Entity(Manager& mManager): _manager(mManager) {}
+
 	void Update()
 	{
 		// loop through entities components vector
@@ -79,6 +86,20 @@ public:
 	void Destroy()
 	{
 		_active = false;	// removed
+	}
+
+	bool HasGroup(Group mGroup)
+	{
+		// does the bitset contain this group
+		return _groupBitSet[mGroup];
+	}
+
+	void AddGroup(Group mGroup);
+
+	void RemoveGroup(Group mGroup)
+	{
+		// the manager will check for falses in the group bit set and remove them
+		_groupBitSet[mGroup] = false;
 	}
 
 	template <typename T> bool HasComponent() const
@@ -121,10 +142,12 @@ public:
 		return *static_cast<T*>(ptr);
 	}
 private:
+	Manager& _manager;
 	bool _active = true;	// false - remove it from the game
 	std::vector<std::unique_ptr<Component>> _components;
 	ComponentArray _componentArray;
 	ComponentBitSet _componentBitSet;
+	GroupBitSet _groupBitSet;
 };
 
 // manages entities
@@ -156,12 +179,34 @@ public:
 			{
 				return !mEntity->IsActive();
 			}), std::end(_entities));
+
+		// loop through grouped entities and remove and falses
+		for (auto i(0u); i < maxGroups; i++)
+		{
+			auto& v(_groupedEntities[i]);
+			v.erase(std::remove_if(std::begin(v), std::end(v), [i](Entity* mEntity)
+				{
+					return !mEntity->IsActive() || !mEntity->HasGroup(i);
+				}), std::end(v));
+		}
+	}
+
+	void AddToGroup(Entity* mEntity, Group mGroup)
+	{
+		// add the entity to the group
+		_groupedEntities[mGroup].emplace_back(mEntity);
+	}
+
+	std::vector<Entity*>& GetGroup(Group mGroup)
+	{
+		// return the group from _groupedEntities
+		return _groupedEntities[mGroup];
 	}
 
 	Entity& AddEntity()
 	{
 		// add a new entity and return the reference to it
-		Entity* e = new Entity();
+		Entity* e = new Entity(*this);	// when an entity is created, it has a reference to this Manager class 
 		std::unique_ptr<Entity> uPtr{ e };	// create a unique pointer initialized to e (Entity pointer)
 		_entities.emplace_back(std::move(uPtr));
 
@@ -169,6 +214,7 @@ public:
 	}
 private:
 	std::vector<std::unique_ptr<Entity>> _entities;	// vector that holds all of the entities
+	std::array<std::vector<Entity*>, maxGroups> _groupedEntities;
 };
 
 #endif // !ECS_H

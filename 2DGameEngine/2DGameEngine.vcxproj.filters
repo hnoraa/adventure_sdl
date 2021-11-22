@@ -31,6 +31,9 @@
     <Filter Include="Source Files\engine\math">
       <UniqueIdentifier>{5e3d1e81-1091-428c-9d0a-c523a866638b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\engine\ECS">
+      <UniqueIdentifier>{ebebf7b4-3c21-4eda-9595-4f7940c3ae60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="engine\collision.cpp">
       <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\ECS\ECS.cpp">
+      <Filter>Source Files\engine\ECS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

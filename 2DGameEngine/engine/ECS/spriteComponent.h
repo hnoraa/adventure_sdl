@@ -11,9 +11,9 @@ class SpriteComponent : public Component
 {
 public:
 	SpriteComponent() = default;
-	SpriteComponent(const char* path)
+	SpriteComponent(const char* mPath)
 	{
-		SetTexture(path);
+		SetTexture(mPath);
 	}
 
 	~SpriteComponent()
@@ -50,9 +50,9 @@ public:
 		TextureManager::DrawTexture(_texture, _src, _dest);
 	}
 
-	void SetTexture(const char* path)
+	void SetTexture(const char* mPath)
 	{
-		_texture = TextureManager::LoadTexture(path);
+		_texture = TextureManager::LoadTexture(mPath);
 	}
 private:
 	TransformComponent* _transform;

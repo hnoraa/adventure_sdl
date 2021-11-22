@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\collision.cpp" />
+    <ClCompile Include="engine\ECS\ECS.cpp" />
     <ClCompile Include="engine\game.cpp" />
     <ClCompile Include="engine\gameObject.cpp" />
     <ClCompile Include="engine\math\vector2D.cpp" />

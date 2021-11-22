@@ -1,11 +1,11 @@
 #include "gameObject.h"
 
-GameObject::GameObject(const char* textureSheet, int x, int y)
+GameObject::GameObject(const char* mTextureSheet, int mX, int mY)
 {
-	_texture = TextureManager::LoadTexture(textureSheet);
+	_texture = TextureManager::LoadTexture(mTextureSheet);
 
-	_x = x;
-	_y = y;
+	_x = mX;
+	_y = mY;
 }
 
 GameObject::~GameObject()

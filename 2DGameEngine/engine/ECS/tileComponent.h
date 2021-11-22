@@ -18,14 +18,14 @@ public:
 
 	TileComponent() = default;
 
-	TileComponent(int x, int y, int w, int h, int id)
+	TileComponent(int mX, int mY, int mW, int mH, int mId)
 	{
-		tileRect.x = x;
-		tileRect.y = y;
-		tileRect.w = w;
-		tileRect.h = h;
+		tileRect.x = mX;
+		tileRect.y = mY;
+		tileRect.w = mW;
+		tileRect.h = mH;
 
-		tileId = id;
+		tileId = mId;
 
 		switch (tileId)
 		{

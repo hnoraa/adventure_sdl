@@ -16,7 +16,7 @@ public:
 	~Game();
 
 	// init SDL window
-	int Init(const char* title, int x, int y, int w, int h, bool fullScreen);
+	int Init(const char* mTitle, int mX, int mY, int mW, int mH, bool mFullScreen);
 
 	// game loop components
 	void HandleEvents();
@@ -31,7 +31,7 @@ public:
 		return _running;
 	}
 
-	static void AddTile(int id, int x, int y);
+	static void AddTile(int mId, int mX, int mY);
 
 	static SDL_Renderer* renderer;
 	static SDL_Event evt;
