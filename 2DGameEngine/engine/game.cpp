@@ -82,7 +82,8 @@ int Game::Init(const char* mTitle, int mX, int mY, int mW, int mH, bool mFullScr
 	TileMap::LoadMap(MAP_FILE, MAP_W, MAP_H);
 
 	player.AddComponent<TransformComponent>(2);
-	player.AddComponent<SpriteComponent>(PLAYER_TEXTURE);
+	//player.AddComponent<SpriteComponent>(PLAYER_TEXTURE, 3, 300);
+	player.AddComponent<SpriteComponent>(PLAYER_TEXTURE, true);
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
 	player.AddGroup(PLAYERS);

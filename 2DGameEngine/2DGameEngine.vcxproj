@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\collision.h" />
+    <ClInclude Include="engine\ECS\animation.h" />
     <ClInclude Include="engine\ECS\colliderComponent.h" />
     <ClInclude Include="engine\ECS\components.h" />
     <ClInclude Include="engine\ECS\ECS.h" />

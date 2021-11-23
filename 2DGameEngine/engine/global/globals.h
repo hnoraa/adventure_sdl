@@ -14,7 +14,7 @@
 
 #define SPRITE_DIM 32
 #define SPRITE_SPEED 3
-#define PLAYER_TEXTURE "res/imgs/player.png"
+#define PLAYER_TEXTURE "res/imgs/human.png"
 
 #define MAP_FILE "res/maps/lvl1.map"
 #define TILE_DIM 32

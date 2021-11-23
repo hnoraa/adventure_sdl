@@ -9,5 +9,6 @@
 #include "keyboardController.h"
 #include "colliderComponent.h"
 #include "tileComponent.h"
+#include "animation.h"
 
 #endif //!COMPONENTS_H
