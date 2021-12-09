@@ -12,6 +12,7 @@
 class SpriteComponent : public Component
 {
 public:
+	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 	int animationIndex = 0;	// where on the sprite sheet we are (height based, each animation is horizontal and they are stacked vertically)
 	std::map<const char*, Animation> animations;
 
@@ -80,7 +81,7 @@ public:
 
 	void Draw() override
 	{
-		TextureManager::DrawTexture(_texture, _src, _dest);
+		TextureManager::DrawTexture(_texture, _src, _dest, spriteFlip);
 	}
 
 	void SetTexture(const char* mPath)

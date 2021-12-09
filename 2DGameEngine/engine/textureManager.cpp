@@ -9,7 +9,9 @@ SDL_Texture* TextureManager::LoadTexture(const char* mFileName)
 	return tex;
 }
 
-void TextureManager::DrawTexture(SDL_Texture* mTexture, SDL_Rect mSrc, SDL_Rect mDest)
+void TextureManager::DrawTexture(SDL_Texture* mTexture, SDL_Rect mSrc, SDL_Rect mDest, SDL_RendererFlip mFlip)
 {
-	SDL_RenderCopy(Game::renderer, mTexture, &mSrc, &mDest);
+	// RenderCopyEx allows you to flip the sprite
+	//SDL_RenderCopy(Game::renderer, mTexture, &mSrc, &mDest);
+	SDL_RenderCopyEx(Game::renderer, mTexture, &mSrc, &mDest, NULL, NULL, mFlip);
 }

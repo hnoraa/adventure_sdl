@@ -38,6 +38,7 @@ public:
 			case SDLK_LEFT:
 				transform->velocity.x = -1;	// moving left
 				sprite->Play("walk");
+				sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
 				break;
 			case SDLK_RIGHT:
 				transform->velocity.x = 1;	// moving right
@@ -70,6 +71,8 @@ public:
 			case SDLK_LEFT:
 				transform->velocity.x = 0;	// moving left
 				sprite->Play("idleFront");
+				sprite->spriteFlip = SDL_FLIP_NONE;
+
 				break;
 			case SDLK_RIGHT:
 				transform->velocity.x = 0;	// moving right
