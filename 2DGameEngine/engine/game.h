@@ -28,7 +28,7 @@ public:
 
 	bool Running() 
 	{
-		return _running;
+		return isRunning;
 	}
 
 	static void AddTile(int mSrcX, int mSrcY , int mXPos, int mYPos);
@@ -37,9 +37,9 @@ public:
 	static SDL_Event evt;
 
 	static std::vector<ColliderComponent*> colliders;
-private:
-	bool _running;
 
+	static bool isRunning;
+private:
 	SDL_Window* _window;
 };
 

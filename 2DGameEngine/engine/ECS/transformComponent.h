@@ -25,7 +25,9 @@ public:
 
 	TransformComponent(int mScale)
 	{
-		position.Zero();
+		// place entity in the center of the screen
+		position.x = SCREEN_W / 2;
+		position.y = SCREEN_H / 2;
 		scale = mScale;
 	}
 
@@ -48,12 +50,6 @@ public:
 	void Init() override
 	{
 		velocity.Zero();
-	}
-
-	void Update() override
-	{
-		position.x += velocity.x * speed;
-		position.y += velocity.y * speed;
 	}
 };
 

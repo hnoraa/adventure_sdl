@@ -12,7 +12,7 @@
 class SpriteComponent : public Component
 {
 public:
-	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
+	SDL_RendererFlip spriteFlip;
 	int animationIndex = 0;	// where on the sprite sheet we are (height based, each animation is horizontal and they are stacked vertically)
 	std::map<const char*, Animation> animations;
 
@@ -25,6 +25,7 @@ public:
 
 	SpriteComponent(const char* mPath, bool mAnimated)
 	{
+		spriteFlip = SDL_FLIP_NONE;
 		_animated = mAnimated;
 
 		// create the animations

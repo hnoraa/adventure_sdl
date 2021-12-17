@@ -5,14 +5,14 @@
 #include "ECS/components.h"
 #include "collision.h"
 
-//TileMap* map;
-
 // statics
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::evt;
 
 // acces to colliders vector (the game collision components)
 std::vector<ColliderComponent*> Game::colliders;
+
+bool Game::isRunning = false;
 
 Manager manager;
 auto& player(manager.AddEntity());	// create a player and add to the manager
@@ -27,15 +27,21 @@ enum groupLabels : std::size_t
 	COLLIDERS
 };
 
+// create the group object lists for rendering
+auto& lTiles(manager.GetGroup(MAP));
+auto& lPlayers(manager.GetGroup(PLAYERS));
+auto& lEnemies(manager.GetGroup(ENEMIES));
+auto& lColliders(manager.GetGroup(COLLIDERS));
+
 Game::Game()
 {
-	_running = false;
+	isRunning = false;
 	_window = nullptr;
 }
 
 Game::~Game()
 {
-	_running = false;
+	isRunning = false;
 	SDL_Quit();
 }
 
@@ -74,7 +80,7 @@ int Game::Init(const char* mTitle, int mX, int mY, int mW, int mH, bool mFullScr
 
 	std::cout << "Renderer Created..." << std::endl;
 
-	_running = true;
+	isRunning = true;
 
 	// add components to the new player entity
 	TileMap::LoadMap(MAP_FILE, MAP_W, MAP_H);
@@ -101,9 +107,6 @@ void Game::HandleEvents()
 
 	switch (evt.type) 
 	{
-	case SDL_QUIT:
-		_running = false;
-		break;
 	default:
 		break;
 	}
@@ -114,31 +117,23 @@ void Game::HandleUpdates()
 	manager.Refresh();
 	manager.Update();
 
-	for (auto collide : colliders) 
+	// scroll the map as the player moves
+	Vector2D playerVelocity = player.GetComponent<TransformComponent>().velocity;
+	int playerSpeed = player.GetComponent<TransformComponent>().speed;
+
+	for (auto tile : lTiles)
 	{
-		if (collide->tag != "player") 
-		{
-			Collision::AABB(player.GetComponent<ColliderComponent>(), *collide);
-		}
+		tile->GetComponent<TileComponent>().destRect.x += -(playerVelocity.x * playerSpeed);
+		tile->GetComponent<TileComponent>().destRect.y += -(playerVelocity.y * playerSpeed);
 	}
 }
-
-// create the group object lists for rendering
-auto& lTiles(manager.GetGroup(MAP));
-auto& lPlayers(manager.GetGroup(PLAYERS));
-auto& lEnemies(manager.GetGroup(ENEMIES));
-auto& lColliders(manager.GetGroup(COLLIDERS));
 
 void Game::HandleRenders()
 {
 	// clear render buffer
 	SDL_RenderClear(renderer);
 
-	//map->DrawMap();
-	//manager.Draw();
-
 	// draw the object lists from the groups
-
 	// draw tiles (map)
 	for (auto& mX : lTiles)
 	{

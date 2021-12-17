@@ -44,12 +44,7 @@ public:
 				transform->velocity.x = 1;	// moving right
 				sprite->Play("walk");
 				break;
-			case SDLK_ESCAPE:
-				// quit
-				if (DEBUG)
-				{
-					Game::evt.type = SDL_QUIT;
-				}
+			
 			default:
 				break;
 			}
@@ -78,6 +73,12 @@ public:
 				transform->velocity.x = 0;	// moving right
 				sprite->Play("idleFront");
 				break;
+			case SDLK_ESCAPE:
+				// quit
+				if (DEBUG)
+				{
+					Game::isRunning = false;
+				}
 			default:
 				break;
 			}
