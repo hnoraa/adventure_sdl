@@ -16,11 +16,9 @@
 #define SPRITE_SPEED 3
 #define PLAYER_TEXTURE "res/imgs/human.png"
 
-#define MAP_FILE "res/maps/lvl1.map"
+#define MAP_FILE "res/maps/level_00.map"
 #define TILE_DIM 32
-#define T_ABYSS "res/imgs/t_abyss.png"
-#define T_DIRT "res/imgs/t_dirt.png"
-#define T_STONE "res/imgs/t_stone.png"
+#define TILE_SHEET "res/imgs/tilesheet_00.png"
 
 #define DEBUG_TEXTURE "res/imgs/debug.png"
 #define DEBUG true

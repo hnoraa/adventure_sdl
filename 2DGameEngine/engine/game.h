@@ -31,7 +31,7 @@ public:
 		return _running;
 	}
 
-	static void AddTile(int mId, int mX, int mY);
+	static void AddTile(int mSrcX, int mSrcY , int mXPos, int mYPos);
 
 	static SDL_Renderer* renderer;
 	static SDL_Event evt;

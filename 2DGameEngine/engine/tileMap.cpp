@@ -13,20 +13,29 @@ TileMap::~TileMap()
 
 void TileMap::LoadMap(std::string mMapFile, int mSizeX, int mSizeY)
 {
-	char tile;
+	char tileChar;
 	std::fstream stream;
 	stream.open(mMapFile);
+
+	int srcX;
+	int srcY;
 
 	// parse the file
 	for (int y = 0; y < mSizeY; y++) 
 	{
 		for (int x = 0; x < mSizeX; x++) 
 		{
-			// get the tile character
-			stream.get(tile);
+			// tile comes in as two digits (ex: 00)
+			// first digit is Y
+			// second is X
+			stream.get(tileChar);
+			srcY = atoi(&tileChar) * TILE_DIM;
+			
+			stream.get(tileChar);
+			srcX = atoi(&tileChar) * TILE_DIM;
 
 			// add to the game
-			Game::AddTile(atoi(&tile), x * TILE_DIM, y * TILE_DIM);
+			Game::AddTile(srcX, srcY, x * (TILE_DIM * 2), y * (TILE_DIM * 2));
 
 			// ignore the comma
 			stream.ignore();

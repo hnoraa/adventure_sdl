@@ -76,31 +76,22 @@ int Game::Init(const char* mTitle, int mX, int mY, int mW, int mH, bool mFullScr
 
 	_running = true;
 
-	//map = new TileMap();
-
 	// add components to the new player entity
 	TileMap::LoadMap(MAP_FILE, MAP_W, MAP_H);
 
 	player.AddComponent<TransformComponent>(2);
-	//player.AddComponent<SpriteComponent>(PLAYER_TEXTURE, 3, 300);
 	player.AddComponent<SpriteComponent>(PLAYER_TEXTURE, true);
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
 	player.AddGroup(PLAYERS);
 
-	// wall components
-	wall.AddComponent<TransformComponent>(300.0f, 300.0f, 20, 280, 1);
-	wall.AddComponent<SpriteComponent>(DEBUG_TEXTURE);
-	wall.AddComponent<ColliderComponent>("wall");
-	wall.AddGroup(MAP);
-
 	return 0;
 }
 
-void Game::AddTile(int mId, int mX, int mY)
+void Game::AddTile(int mSrcX, int mSrcY, int mXPos, int mYPos)
 {
 	auto& tile(manager.AddEntity());
-	tile.AddComponent<TileComponent>(mX, mY, TILE_DIM, TILE_DIM, mId);
+	tile.AddComponent<TileComponent>(mSrcX, mSrcY, mXPos, mYPos, TILE_SHEET);
 	tile.AddGroup(MAP);
 }
 
