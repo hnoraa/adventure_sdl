@@ -39,6 +39,9 @@ public:
 	static std::vector<ColliderComponent*> colliders;
 
 	static bool isRunning;
+
+	// the camera is just an SDL rectangle that is basicallty the "viewport"
+	static SDL_Rect camera;
 private:
 	SDL_Window* _window;
 };

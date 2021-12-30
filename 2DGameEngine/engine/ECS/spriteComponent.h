@@ -73,8 +73,8 @@ public:
 		_src.y = animationIndex * _transform->h;
 
 		// these are referenced from the postion components coordinates 
-		_dest.x = static_cast<int> (_transform->position.x);
-		_dest.y = static_cast<int> (_transform->position.y);
+		_dest.x = static_cast<int> (_transform->position.x) - Game::camera.x;
+		_dest.y = static_cast<int> (_transform->position.y) - Game::camera.y;
 
 		_dest.w = _transform->w * _transform->scale;
 		_dest.h = _transform->h * _transform->scale;

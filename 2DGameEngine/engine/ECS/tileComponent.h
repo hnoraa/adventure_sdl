@@ -13,6 +13,7 @@ public:
 	SDL_Texture* texture;
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
+	Vector2D position;
 	
 	TileComponent() = default;
 
@@ -20,6 +21,9 @@ public:
 	{
 		texture = TextureManager::LoadTexture(mFilePath);
 		
+		position.x = mXPos;
+		position.y = mYPos;
+
 		srcRect.x = mSrcX;
 		srcRect.y = mSrcY;
 		srcRect.w = TILE_DIM;
@@ -29,6 +33,13 @@ public:
 		destRect.y = mYPos;
 		destRect.w = (TILE_DIM * 2);
 		destRect.h = (TILE_DIM * 2);
+	}
+
+	void Update() override
+	{
+		// update destination (x,y) given the position and camera
+		destRect.x = position.x - Game::camera.x;
+		destRect.y = position.y - Game::camera.y;
 	}
 
 	void Draw() override

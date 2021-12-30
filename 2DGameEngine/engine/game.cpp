@@ -12,6 +12,9 @@ SDL_Event Game::evt;
 // acces to colliders vector (the game collision components)
 std::vector<ColliderComponent*> Game::colliders;
 
+// camera object
+SDL_Rect Game::camera = { 0, 0, SCREEN_W, SCREEN_H };
+
 bool Game::isRunning = false;
 
 Manager manager;
@@ -117,14 +120,29 @@ void Game::HandleUpdates()
 	manager.Refresh();
 	manager.Update();
 
-	// scroll the map as the player moves
-	Vector2D playerVelocity = player.GetComponent<TransformComponent>().velocity;
-	int playerSpeed = player.GetComponent<TransformComponent>().speed;
+	// position the camera
+	camera.x = player.GetComponent<TransformComponent>().position.x - (SCREEN_W / 2);
+	camera.y = player.GetComponent<TransformComponent>().position.y - (SCREEN_H / 2);
 
-	for (auto tile : lTiles)
+	// check bounds of the camera
+	if (camera.x < 0)
 	{
-		tile->GetComponent<TileComponent>().destRect.x += -(playerVelocity.x * playerSpeed);
-		tile->GetComponent<TileComponent>().destRect.y += -(playerVelocity.y * playerSpeed);
+		camera.x = 0;
+	}
+
+	if (camera.x > camera.w)
+	{
+		camera.x = camera.w;
+	}
+
+	if (camera.y < 0)
+	{
+		camera.y = 0;
+	}
+
+	if (camera.y > camera.h)
+	{
+		camera.y = camera.h;
 	}
 }
 
