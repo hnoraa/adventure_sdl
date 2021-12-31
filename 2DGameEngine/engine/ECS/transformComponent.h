@@ -41,7 +41,6 @@ public:
 	{
 		position.x = mX;
 		position.y = mY;
-
 		h = mH;
 		w = mW;
 		scale = mScale;
@@ -54,8 +53,8 @@ public:
 
 	void Update() override
 	{
-		position.x += velocity.x * speed;
-		position.y += velocity.y * speed;
+		position.x += static_cast<int>(velocity.x * speed);
+		position.y += static_cast<int>(velocity.y * speed);
 	}
 };
 

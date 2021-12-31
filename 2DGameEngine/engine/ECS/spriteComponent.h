@@ -12,7 +12,7 @@
 class SpriteComponent : public Component
 {
 public:
-	SDL_RendererFlip spriteFlip;
+	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 	int animationIndex = 0;	// where on the sprite sheet we are (height based, each animation is horizontal and they are stacked vertically)
 	std::map<const char*, Animation> animations;
 
@@ -25,7 +25,6 @@ public:
 
 	SpriteComponent(const char* mPath, bool mAnimated)
 	{
-		spriteFlip = SDL_FLIP_NONE;
 		_animated = mAnimated;
 
 		// create the animations
@@ -56,9 +55,6 @@ public:
 		_src.x = _src.y = 0;
 		_src.w = _transform->w;
 		_src.h = _transform->h;
-
-		_dest.w = _transform->w;
-		_dest.h = _transform->h;
 	}
 
 	void Update() override
@@ -67,7 +63,7 @@ public:
 		{
 			// if _frames = 4, then the % operator will cycle through 1, 2, 3, 4 at the _speed variable
 			// added: (_xOffset * SPRITE_DIM), this gets the horizontal beginning of the animation
-			_src.x = (_xOffset * 32) + (_src.w * static_cast<int>((SDL_GetTicks() / _speed) % _frames));
+			_src.x = (_xOffset * TILE_DIM) + (_src.w * static_cast<int>((SDL_GetTicks() / _speed) % _frames));
 		}
 
 		_src.y = animationIndex * _transform->h;
@@ -75,7 +71,6 @@ public:
 		// these are referenced from the postion components coordinates 
 		_dest.x = static_cast<int> (_transform->position.x) - Game::camera.x;
 		_dest.y = static_cast<int> (_transform->position.y) - Game::camera.y;
-
 		_dest.w = _transform->w * _transform->scale;
 		_dest.h = _transform->h * _transform->scale;
 	}

@@ -13,11 +13,19 @@ public:
 	SDL_Rect collider;
 	std::string tag;
 	TransformComponent* transform;
+	SDL_Texture* texture;
+	SDL_Rect srcRect;
+	SDL_Rect destRect;
 
-	ColliderComponent() = default;
 	ColliderComponent(std::string mTag)
 	{
 		tag = mTag;
+	}
+
+	ColliderComponent(std::string mTag, int mXPos, int mYPos, int mSize)
+	{
+		tag = mTag;
+		collider = { mXPos, mYPos, mSize, mSize };
 	}
 
 	void Init() override
@@ -30,18 +38,31 @@ public:
 
 		transform = &entity->GetComponent<TransformComponent>();
 
-		// add this collider component to the games colliders vector
-		Game::colliders.push_back(this);
+		// load the texture and set the SDL rects for the texture
+		texture = TextureManager::LoadTexture(TILE_COLLIDE_TEXTURE);
+		srcRect = { 0, 0, TILE_DIM, TILE_DIM };
+		destRect = { collider.x, collider.y, collider.w, collider.h };
 	}
 
 	void Update() override
 	{
-		// update colliders position and size each frame
-		collider.x = static_cast<int>(transform->position.x);
-		collider.y = static_cast<int>(transform->position.y);
+		if (tag != "terrain")
+		{
+			// update colliders position and size each frame
+			collider.x = static_cast<int>(transform->position.x);
+			collider.y = static_cast<int>(transform->position.y);
+			collider.w = transform->w * transform->scale;
+			collider.h = transform->h * transform->scale;
+		}
 
-		collider.w = transform->w * transform->scale;
-		collider.h = transform->h * transform->scale;
+		// update the destination rect
+		destRect.x = collider.x - Game::camera.x;
+		destRect.y = collider.y - Game::camera.y;
+	}
+
+	void Draw() override
+	{
+		TextureManager::DrawTexture(texture, srcRect, destRect, SDL_FLIP_NONE);
 	}
 };
 

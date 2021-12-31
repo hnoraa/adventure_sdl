@@ -5,36 +5,13 @@
 #include "ECS/components.h"
 #include "collision.h"
 
-// statics
+Manager manager;
+TileMap* map;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::evt;
-
-// acces to colliders vector (the game collision components)
-std::vector<ColliderComponent*> Game::colliders;
-
-// camera object
-SDL_Rect Game::camera = { 0, 0, SCREEN_W, SCREEN_H };
-
+SDL_Rect Game::camera = { 0, 0, SCREEN_W, SCREEN_H };	// camera object
 bool Game::isRunning = false;
-
-Manager manager;
-auto& player(manager.AddEntity());	// create a player and add to the manager
-auto& wall(manager.AddEntity());	// wall to collide with
-
-// group label enum
-enum groupLabels : std::size_t
-{
-	MAP,
-	PLAYERS,
-	ENEMIES,
-	COLLIDERS
-};
-
-// create the group object lists for rendering
-auto& lTiles(manager.GetGroup(MAP));
-auto& lPlayers(manager.GetGroup(PLAYERS));
-auto& lEnemies(manager.GetGroup(ENEMIES));
-auto& lColliders(manager.GetGroup(COLLIDERS));
+auto& player(manager.AddEntity());						// create a player and add to the manager
 
 Game::Game()
 {
@@ -59,11 +36,9 @@ int Game::Init(const char* mTitle, int mX, int mY, int mW, int mH, bool mFullScr
 		std::cout << "ERROR: Can't initialize subsystems..." << std::endl;
 		return -1;
 	}
-
 	std::cout << "Subsystems Initialized..." << std::endl;
 
 	_window = SDL_CreateWindow(mTitle, mX, mY, mW, mH, flags);
-
 	if (!_window)
 	{
 		std::cout << "ERROR: Can't create window..." << std::endl;
@@ -72,43 +47,40 @@ int Game::Init(const char* mTitle, int mX, int mY, int mW, int mH, bool mFullScr
 	std::cout << "Window Created..." << std::endl;
 
 	renderer = SDL_CreateRenderer(_window, -1, 0);
-
 	if (!renderer)
 	{
 		std::cout << "ERROR: Can't create renderer..." << std::endl;
 		return -1;
 	}
-
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-
 	std::cout << "Renderer Created..." << std::endl;
 
 	isRunning = true;
+	
+	map = new TileMap(TILE_SHEET, TILE_SCALE, TILE_DIM);
+	map->LoadMap(MAP_FILE, MAP_W, MAP_H);
 
 	// add components to the new player entity
-	TileMap::LoadMap(MAP_FILE, MAP_W, MAP_H);
-
 	player.AddComponent<TransformComponent>(2);
 	player.AddComponent<SpriteComponent>(PLAYER_TEXTURE, true);
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
-	player.AddGroup(PLAYERS);
+	player.AddGroup(G_PLAYERS);
 
 	return 0;
 }
 
-void Game::AddTile(int mSrcX, int mSrcY, int mXPos, int mYPos)
-{
-	auto& tile(manager.AddEntity());
-	tile.AddComponent<TileComponent>(mSrcX, mSrcY, mXPos, mYPos, TILE_SHEET);
-	tile.AddGroup(MAP);
-}
+// create the group object lists for rendering
+auto& lTiles(manager.GetGroup(Game::G_MAP));
+auto& lPlayers(manager.GetGroup(Game::G_PLAYERS));
+auto& lColliders(manager.GetGroup(Game::G_COLLIDERS));
+auto& lEnemies(manager.GetGroup(Game::G_ENEMIES));
 
 void Game::HandleEvents()
 {
 	SDL_PollEvent(&evt);
 
-	switch (evt.type) 
+	switch (evt.type)
 	{
 	default:
 		break;
@@ -117,12 +89,26 @@ void Game::HandleEvents()
 
 void Game::HandleUpdates()
 {
+	SDL_Rect playerCollider = player.GetComponent<ColliderComponent>().collider;
+	Vector2D playerColliderPosition = player.GetComponent<TransformComponent>().position;
+
 	manager.Refresh();
 	manager.Update();
 
+	for (auto& c : lColliders)
+	{
+		SDL_Rect cCol = c->GetComponent<ColliderComponent>().collider;
+
+		if (Collision::AABB(cCol, playerCollider))
+		{
+			player.GetComponent<TransformComponent>().position = playerColliderPosition;
+			std::cout << "Collision" << std::endl;
+		}
+	}
+
 	// position the camera
-	camera.x = player.GetComponent<TransformComponent>().position.x - (SCREEN_W / 2);
-	camera.y = player.GetComponent<TransformComponent>().position.y - (SCREEN_H / 2);
+	camera.x = static_cast<int>(player.GetComponent<TransformComponent>().position.x - (SCREEN_W / 2));
+	camera.y = static_cast<int>(player.GetComponent<TransformComponent>().position.y - (SCREEN_H / 2));
 
 	// check bounds of the camera
 	if (camera.x < 0)
@@ -158,6 +144,12 @@ void Game::HandleRenders()
 		mX->Draw();
 	}
 
+	// draw colliders
+	for (auto& mX : lColliders)
+	{
+		mX->Draw();
+	}
+
 	// draw players
 	for (auto& mX : lPlayers)
 	{
@@ -166,12 +158,6 @@ void Game::HandleRenders()
 
 	// draw enemies
 	for (auto& mX : lEnemies)
-	{
-		mX->Draw();
-	}
-
-	// draw colliders
-	for (auto& mX : colliders)
 	{
 		mX->Draw();
 	}

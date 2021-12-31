@@ -9,10 +9,17 @@
 class TileMap
 {
 public:
-	TileMap();
+	TileMap(const char *mMapFilePath, int mMapScale, int mTileSize);
 	~TileMap();
 
-	static void LoadMap(std::string mMapFile, int mSizeX, int mSizeY);
+	void LoadMap(std::string mMapFile, int mSizeX, int mSizeY);
+	void AddTile(int mSrcX, int mSrcY, int mXPos, int mYPos);
+	void AddCollider(std::string mTag, int mXPos, int mYPos, int scale);
+private:
+	const char* _mapFilePath;
+	int _mapScale;
+	int _tileSize;
+	int _scaleFactor;
 };
 
 #endif // !TILE_MAP_H

@@ -4,15 +4,16 @@
 // Axis-Aligned Bounding-Box collision
 bool Collision::AABB(const SDL_Rect& mA, const SDL_Rect& mB) 
 {
-	if ((mA.x + mA.w) >= mB.x 
-		&& (mB.x + mB.w) >= mA.x 
-		&& (mA.y + mA.h) >= mB.y 
-		&& (mB.y + mB.h) >= mB.y) 
+	if (
+		mA.x + mA.w >= mB.x &&
+		mB.x + mB.w >= mA.x &&
+		mA.y + mA.h >= mB.y &&
+		mB.y + mB.h >= mA.y
+		) 
 	{
 		return true;
 	}
 
-	// no collision
 	return false;
 }
 
@@ -22,7 +23,8 @@ bool Collision::AABB(const ColliderComponent& mA, ColliderComponent& mB)
 	{
 		return true;
 	}
-
-	// no collision
-	return false;
+	else
+	{
+		return false;
+	}
 }

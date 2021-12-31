@@ -12,12 +12,12 @@
 #define MAP_W 25
 #define MAP_H 20
 
-//#define SPRITE_DIM 32
-//#define SPRITE_SPEED 3
+#define SPRITE_SPEED 3
 #define PLAYER_TEXTURE "res/imgs/human.png"
 
 #define MAP_FILE "res/maps/level_01.map"
-//#define TILE_DIM 32
+#define TILE_DIM 32
+#define TILE_SCALE 2
 #define TILE_SHEET "res/imgs/tilesheet_00.png"
 #define TILE_COLLIDE_TEXTURE "res/imgs/collisionTile.png"
 

@@ -17,39 +17,35 @@ public:
 	
 	TileComponent() = default;
 
-	TileComponent(int mSrcX, int mSrcY, int mXPos, int mYPos, const char * mFilePath)
+	TileComponent(int mSrcX, int mSrcY, int mXPos, int mYPos, int mTileSize, int mTileScale, const char * mFilePath)
 	{
 		texture = TextureManager::LoadTexture(mFilePath);
-		
-		position.x = mXPos;
-		position.y = mYPos;
 
 		srcRect.x = mSrcX;
 		srcRect.y = mSrcY;
-		srcRect.w = 32;
-		srcRect.h = 32;
+		srcRect.w = srcRect.h = mTileSize;
 
-		destRect.x = mXPos;
-		destRect.y = mYPos;
-		destRect.w = (32 * 2);
-		destRect.h = (32 * 2);
-	}
+		position.x = static_cast<int>(mXPos);
+		position.y = static_cast<int>(mYPos);
 
-	void Update() override
-	{
-		// update destination (x,y) given the position and camera
-		destRect.x = position.x - Game::camera.x;
-		destRect.y = position.y - Game::camera.y;
-	}
-
-	void Draw() override
-	{
-		TextureManager::DrawTexture(texture, srcRect, destRect, SDL_FLIP_NONE);
+		destRect.w = destRect.h = mTileSize * mTileScale;
 	}
 
 	~TileComponent()
 	{
 		SDL_DestroyTexture(texture);
+	}
+
+	void Update() override
+	{
+		// update destination (x,y) given the position and camera
+		destRect.x = static_cast<int>(position.x - Game::camera.x);
+		destRect.y = static_cast<int>(position.y - Game::camera.y);
+	}
+
+	void Draw() override
+	{
+		TextureManager::DrawTexture(texture, srcRect, destRect, SDL_FLIP_NONE);
 	}
 };
 
