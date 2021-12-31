@@ -67,7 +67,7 @@ public:
 		{
 			// if _frames = 4, then the % operator will cycle through 1, 2, 3, 4 at the _speed variable
 			// added: (_xOffset * SPRITE_DIM), this gets the horizontal beginning of the animation
-			_src.x = (_xOffset * SPRITE_DIM) + (_src.w * static_cast<int>((SDL_GetTicks() / _speed) % _frames));
+			_src.x = (_xOffset * 32) + (_src.w * static_cast<int>((SDL_GetTicks() / _speed) % _frames));
 		}
 
 		_src.y = animationIndex * _transform->h;

@@ -29,13 +29,13 @@ void TileMap::LoadMap(std::string mMapFile, int mSizeX, int mSizeY)
 			// first digit is Y
 			// second is X
 			stream.get(tileChar);
-			srcY = atoi(&tileChar) * TILE_DIM;
+			srcY = atoi(&tileChar) * 32;
 			
 			stream.get(tileChar);
-			srcX = atoi(&tileChar) * TILE_DIM;
+			srcX = atoi(&tileChar) * 32;
 
 			// add to the game
-			Game::AddTile(srcX, srcY, x * (TILE_DIM * 2), y * (TILE_DIM * 2));
+			Game::AddTile(srcX, srcY, x * (32 * 2), y * (32 * 2));
 
 			// ignore the comma
 			stream.ignore();

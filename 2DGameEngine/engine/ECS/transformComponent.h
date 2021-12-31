@@ -12,11 +12,11 @@ public:
 	Vector2D position;
 	Vector2D velocity;
 
-	int h = SPRITE_DIM;
-	int w = SPRITE_DIM;
+	int h = 32;
+	int w = 32;
 	int scale = 1;
 
-	int speed = SPRITE_SPEED;
+	int speed = 3;
 
 	TransformComponent()
 	{

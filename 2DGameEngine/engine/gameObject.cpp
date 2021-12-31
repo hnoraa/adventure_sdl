@@ -14,8 +14,8 @@ GameObject::~GameObject()
 
 void GameObject::HandleUpdates()
 {
-	_srcRect.h = SPRITE_DIM;
-	_srcRect.w = SPRITE_DIM;
+	_srcRect.h = 32;
+	_srcRect.w = 32;
 	_srcRect.x = 0;
 	_srcRect.y = 0;
 

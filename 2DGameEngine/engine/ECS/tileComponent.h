@@ -26,13 +26,13 @@ public:
 
 		srcRect.x = mSrcX;
 		srcRect.y = mSrcY;
-		srcRect.w = TILE_DIM;
-		srcRect.h = TILE_DIM;
+		srcRect.w = 32;
+		srcRect.h = 32;
 
 		destRect.x = mXPos;
 		destRect.y = mYPos;
-		destRect.w = (TILE_DIM * 2);
-		destRect.h = (TILE_DIM * 2);
+		destRect.w = (32 * 2);
+		destRect.h = (32 * 2);
 	}
 
 	void Update() override
