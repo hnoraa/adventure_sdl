@@ -7,7 +7,7 @@
 
 extern Manager manager;	// this is externally defined in the game class
 
-TileMap::TileMap(const char* mMapFilePath, int mMapScale, int mTileSize) : _mapFilePath(mMapFilePath), _mapScale(mMapScale), _tileSize(mTileSize)
+TileMap::TileMap(std::string mTextureId, int mMapScale, int mTileSize) : _textureId(mTextureId), _mapScale(mMapScale), _tileSize(mTileSize)
 {
 	_scaleFactor = (_tileSize * _mapScale);
 }
@@ -73,7 +73,7 @@ void TileMap::LoadMap(std::string mMapFile, int mSizeX, int mSizeY)
 void TileMap::AddTile(int mSrcX, int mSrcY, int mXPos, int mYPos)
 {
 	auto& tile(manager.AddEntity());
-	tile.AddComponent<TileComponent>(mSrcX, mSrcY, mXPos, mYPos, _tileSize, _mapScale, _mapFilePath);
+	tile.AddComponent<TileComponent>(mSrcX, mSrcY, mXPos, mYPos, _tileSize, _mapScale, _textureId);
 	tile.AddGroup(Game::G_MAP);
 }
 

@@ -10,5 +10,6 @@
 #include "colliderComponent.h"
 #include "tileComponent.h"
 #include "animation.h"
+#include "projectileComponent.h"
 
 #endif //!COMPONENTS_H

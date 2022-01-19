@@ -7,6 +7,7 @@
 #include "components.h"
 #include "../textureManager.h"
 #include "animation.h"
+#include "../assetManager.h"
 #include <map>
 
 class SpriteComponent : public Component
@@ -18,12 +19,12 @@ public:
 
 	SpriteComponent() = default;
 
-	SpriteComponent(const char* mPath)
+	SpriteComponent(std::string mId)
 	{
-		SetTexture(mPath);
+		SetTexture(mId);
 	}
 
-	SpriteComponent(const char* mPath, bool mAnimated)
+	SpriteComponent(std::string mTextureId, bool mAnimated)
 	{
 		_animated = mAnimated;
 
@@ -38,12 +39,14 @@ public:
 
 		Play("idleBack");
 
-		SetTexture(mPath);
+		SetTexture(mTextureId);
 	}
 
 	~SpriteComponent()
 	{
-		SDL_DestroyTexture(_texture);
+		// don't do this here because the asset manager handles the textures
+		// and this texture could be used by multiple objects
+		// SDL_DestroyTexture(_texture);
 	}
 
 	void Init() override
@@ -80,9 +83,9 @@ public:
 		TextureManager::DrawTexture(_texture, _src, _dest, spriteFlip);
 	}
 
-	void SetTexture(const char* mPath)
+	void SetTexture(std::string mTextureId)
 	{
-		_texture = TextureManager::LoadTexture(mPath);
+		_texture = Game::assets->GetTexture(mTextureId);
 	}
 
 	void Play(const char* mAnimationName)

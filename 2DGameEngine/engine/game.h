@@ -7,7 +7,7 @@
 #include <vector>
 
 class ColliderComponent;	// forward declaration of ColliderComponent because it's not compiled at this point
-
+class AssetManager;			// forward declaration of AssetManager because it's not compiled at this point
 class Game
 {
 public:
@@ -25,6 +25,7 @@ public:
 	}
 
 	static SDL_Renderer* renderer;
+	static AssetManager* assets;
 	static SDL_Event evt;
 	static bool isRunning;
 	static SDL_Rect camera;								// the camera is just an SDL rectangle that is basicallty the "viewport"
@@ -33,7 +34,8 @@ public:
 		G_MAP,
 		G_PLAYERS,
 		G_ENEMIES,
-		G_COLLIDERS
+		G_COLLIDERS,
+		G_PROJECTILES
 	};
 private:
 	SDL_Window* _window;

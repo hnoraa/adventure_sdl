@@ -6,6 +6,7 @@
 #include "components.h"
 #include "../global/defines.h"
 #include "../textureManager.h"
+#include "../assetManager.h"
 
 class TileComponent : public Component
 {
@@ -17,9 +18,9 @@ public:
 	
 	TileComponent() = default;
 
-	TileComponent(int mSrcX, int mSrcY, int mXPos, int mYPos, int mTileSize, int mTileScale, const char * mFilePath)
+	TileComponent(int mSrcX, int mSrcY, int mXPos, int mYPos, int mTileSize, int mTileScale, std::string mTextureId)
 	{
-		texture = TextureManager::LoadTexture(mFilePath);
+		texture = Game::assets->GetTexture(mTextureId);
 
 		srcRect.x = mSrcX;
 		srcRect.y = mSrcY;
@@ -33,7 +34,9 @@ public:
 
 	~TileComponent()
 	{
-		SDL_DestroyTexture(texture);
+		// don't do this here because the asset manager handles the textures
+		// and this texture could be used by multiple objects
+		// SDL_DestroyTexture(texture);
 	}
 
 	void Update() override

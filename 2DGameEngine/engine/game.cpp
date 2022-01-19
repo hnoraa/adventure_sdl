@@ -4,6 +4,8 @@
 #include "./math/vector2D.h"
 #include "ECS/components.h"
 #include "collision.h"
+#include "assetManager.h"
+
 
 Manager manager;
 TileMap* map;
@@ -12,6 +14,7 @@ SDL_Event Game::evt;
 SDL_Rect Game::camera = { 0, 0, SCREEN_W, SCREEN_H };	// camera object
 bool Game::isRunning = false;
 auto& player(manager.AddEntity());						// create a player and add to the manager
+AssetManager* Game::assets = new AssetManager(&manager);
 
 Game::Game()
 {
@@ -57,15 +60,26 @@ int Game::Init(const char* mTitle, int mX, int mY, int mW, int mH, bool mFullScr
 
 	isRunning = true;
 	
-	map = new TileMap(TILE_SHEET, TILE_SCALE, TILE_DIM);
+	// add to asset manager
+	assets->AddTexture("terrain", TILE_SHEET);
+	assets->AddTexture("player", PLAYER_TEXTURE);
+	assets->AddTexture("projectile", P_IMG_0);
+
+	map = new TileMap("terrain", TILE_SCALE, TILE_DIM);
 	map->LoadMap(MAP_FILE, MAP_W, MAP_H);
 
 	// add components to the new player entity
-	player.AddComponent<TransformComponent>(2);
-	player.AddComponent<SpriteComponent>(PLAYER_TEXTURE, true);
+	player.AddComponent<TransformComponent>(500.0f, 430.0f, TILE_DIM, TILE_DIM, 2);
+	player.AddComponent<SpriteComponent>("player", true);
 	player.AddComponent<KeyboardController>();
 	player.AddComponent<ColliderComponent>("player");
 	player.AddGroup(G_PLAYERS);
+
+	// create a projectile
+	assets->CreateProjectile(Vector2D(300, 300), Vector2D(2, 0), 800, 2, "projectile");
+	assets->CreateProjectile(Vector2D(300, 310), Vector2D(2, 0), 800, 2, "projectile");
+	assets->CreateProjectile(Vector2D(300, 320), Vector2D(2, 0), 800, 2, "projectile");
+	assets->CreateProjectile(Vector2D(300, 340), Vector2D(2, 0), 800, 2, "projectile");
 
 	return 0;
 }
@@ -75,6 +89,7 @@ auto& lTiles(manager.GetGroup(Game::G_MAP));
 auto& lPlayers(manager.GetGroup(Game::G_PLAYERS));
 auto& lColliders(manager.GetGroup(Game::G_COLLIDERS));
 auto& lEnemies(manager.GetGroup(Game::G_ENEMIES));
+auto& lProjectiles(manager.GetGroup(Game::G_PROJECTILES));
 
 void Game::HandleEvents()
 {
@@ -103,6 +118,17 @@ void Game::HandleUpdates()
 		{
 			player.GetComponent<TransformComponent>().position = playerColliderPosition;
 			std::cout << "Collision" << std::endl;
+		}
+	}
+
+	for (auto& p : lProjectiles)
+	{
+		if (Collision::AABB(player.GetComponent<ColliderComponent>().collider, p->GetComponent<ColliderComponent>().collider))
+		{
+			std::cout << "Projectile hit player" << std::endl;
+
+			// "delete" the projectile, this is where we'd add in health and stuff (i.e. damage, etc)
+			p->Destroy();
 		}
 	}
 
@@ -158,6 +184,12 @@ void Game::HandleRenders()
 
 	// draw enemies
 	for (auto& mX : lEnemies)
+	{
+		mX->Draw();
+	}
+
+	// draw projectiles
+	for (auto& mX : lProjectiles)
 	{
 		mX->Draw();
 	}

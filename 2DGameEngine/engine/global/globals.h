@@ -15,6 +15,8 @@
 #define SPRITE_SPEED 3
 #define PLAYER_TEXTURE "res/imgs/human.png"
 
+#define P_IMG_0 "res/imgs/projectile_00.png"
+
 #define MAP_FILE "res/maps/level_01.map"
 #define TILE_DIM 32
 #define TILE_SCALE 2

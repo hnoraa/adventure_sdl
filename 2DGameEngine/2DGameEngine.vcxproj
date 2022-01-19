@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine\assetManager.cpp" />
     <ClCompile Include="engine\collision.cpp" />
     <ClCompile Include="engine\ECS\ECS.cpp" />
     <ClCompile Include="engine\game.cpp" />
@@ -156,12 +157,14 @@
     <None Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\assetManager.h" />
     <ClInclude Include="engine\collision.h" />
     <ClInclude Include="engine\ECS\animation.h" />
     <ClInclude Include="engine\ECS\colliderComponent.h" />
     <ClInclude Include="engine\ECS\components.h" />
     <ClInclude Include="engine\ECS\ECS.h" />
     <ClInclude Include="engine\ECS\keyboardController.h" />
+    <ClInclude Include="engine\ECS\projectileComponent.h" />
     <ClInclude Include="engine\ECS\spriteComponent.h" />
     <ClInclude Include="engine\ECS\tileComponent.h" />
     <ClInclude Include="engine\ECS\transformComponent.h" />

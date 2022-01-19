@@ -174,12 +174,6 @@ public:
 
 	void Refresh()
 	{
-		// loop through all entities and remove if not active
-		_entities.erase(std::remove_if(std::begin(_entities), std::end(_entities), [](const std::unique_ptr<Entity>& mEntity)
-			{
-				return !mEntity->IsActive();
-			}), std::end(_entities));
-
 		// loop through grouped entities and remove and falses
 		for (auto i(0u); i < maxGroups; i++)
 		{
@@ -189,6 +183,12 @@ public:
 					return !mEntity->IsActive() || !mEntity->HasGroup(i);
 				}), std::end(v));
 		}
+
+		// loop through all entities and remove if not active
+		_entities.erase(std::remove_if(std::begin(_entities), std::end(_entities), [](const std::unique_ptr<Entity>& mEntity)
+			{
+				return !mEntity->IsActive();
+			}), std::end(_entities));
 	}
 
 	void AddToGroup(Entity* mEntity, Group mGroup)

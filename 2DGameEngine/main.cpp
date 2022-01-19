@@ -1,3 +1,5 @@
+// Based off of: https://github.com/carlbirch/BirchEngine/blob/master/BirchEngine/Src/ECS/ECS.h
+// And: https://www.youtube.com/watch?v=QQzAHcojEKg&list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx
 #include "engine/game.h"
 
 Game* game = nullptr;
